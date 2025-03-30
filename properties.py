@@ -12,7 +12,7 @@ properties = {
             1500 + 300 + 275 + 55 + 36 + 220.1 + 540 + 14.4
         ),
         "expense_conveyancing_sell": Decimal(2500),
-        "expense_renovation": Decimal(850000 - 765000),
+        "expense_renovation": Decimal(860600 - 765000),
         "expense_stamp_duty": Decimal(36200) - Decimal(22990.56),
         "income_sell_property": Decimal(1000000),
     },
