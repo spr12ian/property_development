@@ -41,13 +41,15 @@ properties = {
         "address": "22 Malcolm Road, London, SE25 5HG",
         "aiming_to_sell_for": Decimal(480000),
         "buyer_type": BuyerTypes.FIRST_TIME_BUYER,
-        "comments": "Josh owed £5,000 extra stamp duty + a thank-you figure; to be deducted from the profit shown",
+        "comments": "Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         "estate_agent_percentage": int(2),
         "expense_auction": Decimal(1900),
         "expense_buy_property": Decimal(350000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
         "expense_renovation": Decimal(50000),
+        "url": "https://auctions.savills.co.uk/auctions/8-april-2025-185/22-malcolm-road-south-norwood-london-se25-5hg-15765",
+        
     },
     "2025-09-01 Josh": {
         "address": "Somewhere near work, London, SW15 3SA",
@@ -61,7 +63,7 @@ properties = {
     "2025-09-02 Josh": {
         "address": "Somewhere near work, London, SW15 3SA",
         "buyer_type": BuyerTypes.NON_FIRST_TIME_BUYER,
-        "comments": "We need to give Josh £5,000 to pay his extra stamp duty",
+        "comments": "£10,000 stamp duty paid by Charlie & Ians",
         "expense_auction": Decimal(1900),
         "expense_buy_property": Decimal(400000),
         "expense_conveyancing_fee_buy": Decimal(2500),
