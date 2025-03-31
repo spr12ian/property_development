@@ -2,8 +2,9 @@ from cls_buyer_types import get_buyer_type_name, BuyerTypes as BuyerTypes
 from decimal import Decimal
 
 properties = {
-    "Charlie": {
+    "2021-05-10 Charlie": {
         "address": "Glenburnie Lodge, 1 Springfield Drive, London, SW17 0SR",
+        "aiming_to_sell_for": Decimal(1000000),
         "buyer_type": BuyerTypes.NON_FIRST_TIME_BUYER,
         "comments": "Charlie paid 2nd home SDLT £36,200 and received a refund of £22,990.56",
         "estate_agent_percentage": int(2),
@@ -14,28 +15,58 @@ properties = {
         "expense_conveyancing_sell": Decimal(2500),
         "expense_renovation": Decimal(860600 - 765000),
         "expense_stamp_duty": Decimal(36200) - Decimal(22990.56),
-        "income_sell_property": Decimal(1000000),
     },
-    "CB Property Development": {
+    "2025-04-08 CB Property Development": {
         "address": "22 Malcolm Road, London, SE25 5HG",
+        "aiming_to_sell_for": Decimal(480000),
         "buyer_type": BuyerTypes.LIMITED_COMPANY,
         "expense_accountant": Decimal(12 * 89 * 1.2),
         "expense_auction": Decimal(1900),
         "expense_buy_property": Decimal(350000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
-        "expense_renovation": Decimal(100000),
-        "income_sell_property": Decimal(450000),
+        "expense_renovation": Decimal(50000),
     },
-    "Ian S": {
+    "2025-04-08 Ian B & Ian S": {
         "address": "22 Malcolm Road, London, SE25 5HG",
+        "aiming_to_sell_for": Decimal(480000),
         "buyer_type": BuyerTypes.SECOND_HOME_BUYER,
         "expense_auction": Decimal(1900),
         "expense_buy_property": Decimal(350000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
-        "expense_renovation": Decimal(100000),
-        "income_sell_property": Decimal(450000),
+        "expense_renovation": Decimal(50000),
+    },
+    "2025-04-08 Josh": {
+        "address": "22 Malcolm Road, London, SE25 5HG",
+        "aiming_to_sell_for": Decimal(480000),
+        "buyer_type": BuyerTypes.FIRST_TIME_BUYER,
+        "comments": "Josh owed £5,000 extra stamp duty + a thank-you figure; to be deducted from the profit shown",
+        "estate_agent_percentage": int(2),
+        "expense_auction": Decimal(1900),
+        "expense_buy_property": Decimal(350000),
+        "expense_conveyancing_fee_buy": Decimal(2500),
+        "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_renovation": Decimal(50000),
+    },
+    "2025-09-01 Josh": {
+        "address": "Somewhere near work, London, SW15 3SA",
+        "buyer_type": BuyerTypes.FIRST_TIME_BUYER,
+        "expense_auction": Decimal(1900),
+        "expense_buy_property": Decimal(400000),
+        "expense_conveyancing_fee_buy": Decimal(2500),
+        "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_renovation": Decimal(0),
+    },
+    "2025-09-02 Josh": {
+        "address": "Somewhere near work, London, SW15 3SA",
+        "buyer_type": BuyerTypes.NON_FIRST_TIME_BUYER,
+        "comments": "We need to give Josh £5,000 to pay his extra stamp duty",
+        "expense_auction": Decimal(1900),
+        "expense_buy_property": Decimal(400000),
+        "expense_conveyancing_fee_buy": Decimal(2500),
+        "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_renovation": Decimal(0),
     },
 }
 
