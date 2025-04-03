@@ -23,6 +23,7 @@ for key, value in properties.items():
         expense_buy_property,
         expense_conveyancing_buy,
         expense_conveyancing_sell,
+        expense_insurance,
         expense_renovation,
         expense_stamp_duty,
     ) = (
@@ -36,6 +37,7 @@ for key, value in properties.items():
         value["expense_buy_property"],
         value.get("expense_conveyancing_buy", Decimal(0)),
         value.get("expense_conveyancing_sell", Decimal(0)),
+        value.get("expense_insurance", Decimal(0)),
         value.get("expense_renovation", Decimal(0)),
         value.get("expense_stamp_duty", None),
     )
@@ -61,6 +63,7 @@ for key, value in properties.items():
         + expense_conveyancing_buy
         + expense_conveyancing_sell
         + expense_estate_agent
+        + expense_insurance
         + expense_renovation
         + expense_stamp_duty
     )
@@ -92,6 +95,6 @@ for key, value in properties.items():
 
         print(f"Net profit: £{pre_tax_profit - capital_gains_tax:>9,.2f}")
 
-        print("=" * 40)
+    print("=" * 40)
 
 SDLT_Rates.print_rates()

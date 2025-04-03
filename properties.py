@@ -13,6 +13,7 @@ properties = {
             1500 + 300 + 275 + 55 + 36 + 220.1 + 540 + 14.4
         ),
         "expense_conveyancing_sell": Decimal(2500),
+        "expense_insurance": Decimal(400 * 4),
         "expense_renovation": Decimal(860600 - 765000),
         "expense_stamp_duty": Decimal(36200) - Decimal(22990.56),
     },
@@ -25,6 +26,7 @@ properties = {
         "expense_buy_property": Decimal(330000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_insurance": Decimal(400),
         "expense_renovation": Decimal(50000),
     },
     "2025-04-08 Ian B & Ian S": {
@@ -35,6 +37,7 @@ properties = {
         "expense_buy_property": Decimal(350000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_insurance": Decimal(400),
         "expense_renovation": Decimal(50000),
     },
     "2025-04-08 Josh": {
@@ -47,9 +50,9 @@ properties = {
         "expense_buy_property": Decimal(330000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_insurance": Decimal(400),
         "expense_renovation": Decimal(50000),
         "url": "https://auctions.savills.co.uk/auctions/8-april-2025-185/22-malcolm-road-south-norwood-london-se25-5hg-15765",
-        
     },
     "2025-09-01 Josh": {
         "address": "Somewhere near work, London, SW15 3SA",
@@ -58,6 +61,7 @@ properties = {
         "expense_buy_property": Decimal(400000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_insurance": Decimal(400),
         "expense_renovation": Decimal(0),
     },
     "2025-09-02 Josh": {
@@ -68,7 +72,22 @@ properties = {
         "expense_buy_property": Decimal(400000),
         "expense_conveyancing_fee_buy": Decimal(2500),
         "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_insurance": Decimal(400),
         "expense_renovation": Decimal(0),
+    },
+    "2025-04-16 Josh": {
+        "address": "Flat A, 23 Airedale Road, Balham, London, SW12 8SQ",
+        "aiming_to_sell_for": Decimal(800000),
+        "buyer_type": BuyerTypes.FIRST_TIME_BUYER,
+        "comments": "Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
+        "estate_agent_percentage": int(2),
+        "expense_auction": Decimal(1750),
+        "expense_buy_property": Decimal(300000),
+        "expense_conveyancing_fee_buy": Decimal(3000),
+        "expense_conveyancing_fee_sell": Decimal(2500),
+        "expense_insurance": Decimal(400),
+        "expense_renovation": Decimal(100000),
+        "url": "https://www.allsop.co.uk/lot-overview/vacant-leasehold-self-contained-ground-floor-flat-in-london/r250415-088",
     },
 }
 
