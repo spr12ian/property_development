@@ -4,7 +4,7 @@ from decimal import Decimal
 properties = {
     "2021-05-10 Charlie": {
         "address": "Glenburnie Lodge, 1 Springfield Drive, London, SW17 0SR",
-        "aiming_to_sell_for": Decimal(1000000),
+        "aiming_to_sell_for": Decimal(1100000),
         "buyer_type": BuyerTypes.NON_FIRST_TIME_BUYER,
         "comments": "Charlie paid 2nd home SDLT £36,200 and received a refund of £22,990.56",
         "estate_agent_percentage": int(2),
