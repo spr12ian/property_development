@@ -91,9 +91,12 @@ properties = {
     },
     "2025-05-22 Josh": {
         "address": "11 Tennyson Street, London, SW8 3ST",
-        "aiming_to_sell_for": Decimal(400000),
+        "aiming_to_sell_for": Decimal(496000),
         "auction":{
-            "auctioneer": "allsop"
+            "auctioneer": "allsop",
+            "auction_date": "2025-05-22",
+            "lot_number": 34,
+            "url": "https://www.allsop.co.uk/lot-overview/vacant-leasehold-self-contained-ground-floor-flat-in-london/r250521-091",
         },
         "buyer_type": BuyerTypes.FIRST_TIME_BUYER,
         "comments": "Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",

@@ -1,8 +1,12 @@
-auctioneers={
+from decimal import Decimal
+
+auctioneers = {
     "allsop": {
-        "name": "Allsops"
+        "buyers_fee": Decimal(2000),
+        "name": "Allsops",
     },
     "savills": {
-        "name": "Savills"
+        "buyers_fee": Decimal(1750),
+        "name": "Savills",
     },
 }

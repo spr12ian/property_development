@@ -16,10 +16,6 @@ class BuyerTypes(Enum):
     # OTHER = auto()
     # UNKNOWN = auto()
 
-class Junk:
-    def __init__(self,buyer_type:Enum=None) -> None:
-        pass
-
 def get_buyer_type_name(buyer_type):
     """
     Returns the buyer type as a formatted string.
