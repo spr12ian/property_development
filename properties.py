@@ -91,7 +91,7 @@ properties = {
     },
     "2025-05-22 Josh": {
         "address": "11 Tennyson Street, London, SW8 3ST",
-        "aiming_to_sell_for": Decimal(496000),
+        "aiming_to_sell_for": Decimal(582000),
         "auction":{
             "auctioneer": "allsop",
             "auction_date": "2025-05-22",
@@ -101,7 +101,7 @@ properties = {
         "buyer_type": BuyerTypes.FIRST_TIME_BUYER,
         "comments": "Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         "estate_agent_percentage": int(2),
-        "expense_auction": Decimal(1750),
+        "expense_auction": Decimal(2000),
         "expense_buy_property": Decimal(1.5*215000),
         "expense_conveyancing_fee_buy": Decimal(3000),
         "expense_conveyancing_fee_sell": Decimal(2500),
