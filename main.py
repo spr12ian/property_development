@@ -1,12 +1,11 @@
+from cls_development import Development
 from cls_sdlt_calculator import SDLT_Calculator
-from developments import developments, pprint
+from developments import developments
 from cls_buyer_types import get_buyer_type_name, BuyerTypes
 from decimal import Decimal
 from cls_sdlt_rates import SDLT_Rates
-from cls_cgt_calculator import CGT_Calculator
-from cls_cgt_rates import CGT_Rates
 
-def analyze_development(development):
+def analyze_development(development: Development)-> None:
     """
     Analyze a development and print the results.
     :param development: The development to analyze.
@@ -15,7 +14,7 @@ def analyze_development(development):
     print("=" * 40)
 
     # Get the buyer type
-    buyer_type = development[development]["buyer_type"]
+    buyer_type = development.buyer.buyer_type
     print(f"Buyer type: {get_buyer_type_name(buyer_type)}")
 
     # Get the address
