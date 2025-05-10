@@ -6,28 +6,56 @@ from cls_sdlt_rates import SDLT_Rates
 from cls_cgt_calculator import CGT_Calculator
 from cls_cgt_rates import CGT_Rates
 
-
-sdlt_calculator = SDLT_Calculator()
-
-for property in developments:
-    print(f"Property: {property}")
+def analyze_development(development):
+    """
+    Analyze a development and print the results.
+    :param development: The development to analyze.
+    """
+    print(f"Analyzing development: {development}")
     print("=" * 40)
 
     # Get the buyer type
-    buyer_type = developments[property]["buyer_type"]
+    buyer_type = development[development]["buyer_type"]
     print(f"Buyer type: {get_buyer_type_name(buyer_type)}")
 
     # Get the address
-    address = developments[property]["address"]
+    address = developments[development]["address"]
     print(f"Address: {address}")
 
     # Get the comments
-    comments = developments[property].get("comments", "")
+    comments = developments[development].get("comments", "")
     if comments:
         print(f"Comments: {comments}")
 
     # Get the URL
-    url = developments[property].get("url", "")
+    url = developments[development].get("url", "")
+    if url:
+        print(f"URL: {url}")
+
+sdlt_calculator = SDLT_Calculator()
+
+for development in developments:
+    analyze_development(development)
+
+    # Get the buyer type
+    print(f"development: {development}")
+    print("=" * 40)
+
+    # Get the buyer type
+    buyer_type = developments[development]["buyer_type"]
+    print(f"Buyer type: {get_buyer_type_name(buyer_type)}")
+
+    # Get the address
+    address = developments[development]["address"]
+    print(f"Address: {address}")
+
+    # Get the comments
+    comments = developments[development].get("comments", "")
+    if comments:
+        print(f"Comments: {comments}")
+
+    # Get the URL
+    url = developments[development].get("url", "")
     if url:
         print(f"URL: {url}")
 
@@ -42,7 +70,7 @@ for key, value in developments.items():
         estate_agent_percentage,
         expense_accountant,
         expense_auction,
-        expense_buy_property,
+        expense_buy_development,
         expense_conveyancing_buy,
         expense_conveyancing_sell,
         expense_insurance,
@@ -56,7 +84,7 @@ for key, value in developments.items():
         value.get("estate_agent_percentage", None),
         value.get("expense_accountant", Decimal(0)),
         value.get("expense_auction", Decimal(0)),
-        value["expense_buy_property"],
+        value["expense_buy_development"],
         value.get("expense_conveyancing_buy", Decimal(0)),
         value.get("expense_conveyancing_sell", Decimal(0)),
         value.get("expense_insurance", Decimal(0)),
@@ -74,14 +102,14 @@ for key, value in developments.items():
 
     if not "expense_stamp_duty" in value:
         expense_stamp_duty = sdlt_calculator.calculate_sdlt(
-            buyer_type, expense_buy_property
+            buyer_type, expense_buy_development
         )
         print(f"Expense Stamp Duty: £{expense_stamp_duty:>9,.2f}")
 
     total_expenses = (
         expense_accountant
         + expense_auction
-        + expense_buy_property
+        + expense_buy_development
         + expense_conveyancing_buy
         + expense_conveyancing_sell
         + expense_estate_agent

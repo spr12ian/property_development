@@ -6,3 +6,4 @@ from dataclasses import dataclass
 class Auctioneer:
     buyers_fee: GBP
     name: str
+    url: str

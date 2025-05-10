@@ -7,3 +7,4 @@ from datetime import date
 class Auction:
     auctioneer: Auctioneer
     auction_date: date
+

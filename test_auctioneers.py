@@ -20,3 +20,8 @@ class TestAuctioneerHelper:
         auctioneer = auctioneers.auctioneers["allsop"]
         auctioneer_helper = auctioneers.AuctioneerHelper(auctioneer)
         assert auctioneer_helper.get_auctioneer_website() == "https://www.allsop.co.uk/"
+
+for auctioneer in auctioneers:
+    auctioneer_helper = AuctioneerHelper(auctioneer)
+    print(f"Auctioneer: {auctioneer_helper.get_auctioneer_name()}")
+    print(f"Buyers fee: {auctioneer_helper.get_buyers_fee()}")

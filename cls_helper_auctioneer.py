@@ -1,4 +1,4 @@
-import auctioneers
+from auctioneers import auctioneers
 
 class AuctioneerHelper:
     def __init__(self, auctioneer):
@@ -19,7 +19,3 @@ class AuctioneerHelper:
     def get_buyers_fee(self):
         return self.auctioneer["buyers_fee"]
     
-for auctioneer in auctioneers.auctioneers:
-    auctioneer_helper = AuctioneerHelper(auctioneers.auctioneers[auctioneer])
-    print(f"Auctioneer: {auctioneer_helper.get_auctioneer_name()}")
-    print(f"Buyers fee: {auctioneer_helper.get_buyers_fee()}")
