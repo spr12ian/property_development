@@ -1,5 +1,5 @@
 from cls_sdlt_calculator import SDLT_Calculator
-from properties import properties, pprint
+from developments import developments, pprint
 from cls_buyer_types import get_buyer_type_name, BuyerTypes
 from decimal import Decimal
 from cls_sdlt_rates import SDLT_Rates
@@ -9,7 +9,29 @@ from cls_cgt_rates import CGT_Rates
 
 sdlt_calculator = SDLT_Calculator()
 
-for key, value in properties.items():
+for property in developments:
+    print(f"Property: {property}")
+    print("=" * 40)
+
+    # Get the buyer type
+    buyer_type = developments[property]["buyer_type"]
+    print(f"Buyer type: {get_buyer_type_name(buyer_type)}")
+
+    # Get the address
+    address = developments[property]["address"]
+    print(f"Address: {address}")
+
+    # Get the comments
+    comments = developments[property].get("comments", "")
+    if comments:
+        print(f"Comments: {comments}")
+
+    # Get the URL
+    url = developments[property].get("url", "")
+    if url:
+        print(f"URL: {url}")
+
+for key, value in developments.items():
     pprint(key)
 
     (
