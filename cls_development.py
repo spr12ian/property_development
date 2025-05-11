@@ -1,9 +1,10 @@
 from cls_buyer import Buyer
-from cls_lot import Lot
+from cls_development_expense import DevelopmentExpense
+from cls_gbp import GBP
+from cls_percentage import Percentage
 from cls_property import Property
-from dataclasses import dataclass
-from decimal import Decimal
-from gbp import GBP
+from dataclasses import dataclass, field
+from typing import Optional, Tuple
 
 
 @dataclass(frozen=True)
@@ -11,14 +12,19 @@ class Development:
     aiming_to_sell_for: GBP
     buyer: Buyer
     comments: str
-    estate_agent_percentage: Decimal
-    expense_accountant: GBP
-    expense_auction: GBP
-    expense_buy_property: GBP
-    expense_conveyancing_fee_buy: GBP
-    expense_conveyancing_fee_sell: GBP
-    expense_insurance: GBP
-    expense_renovation: GBP
-    expense_stamp_duty: GBP
-    lot: Lot
+    estate_agent_percentage: Percentage
     property: Property
+    expenses: Tuple[DevelopmentExpense, ...] = field(default_factory=tuple)
+
+    def __str__(self) -> str:
+        return f"{self.property} {self.buyer}"
+    
+    def __post_init__(self):
+        object.__setattr__(self, 'expenses', tuple(self.expenses))
+
+    def net_profit_or_loss(self) -> GBP:
+        total_expenses = sum((e.cost for e in self.expenses), start=GBP(0))
+        agent_fee = self.estate_agent_percentage.of(self.aiming_to_sell_for)
+        total_outgoings = total_expenses + agent_fee
+        return self.aiming_to_sell_for - total_outgoings
+

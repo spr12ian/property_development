@@ -1,7 +1,7 @@
 from cls_development import Development
 from cls_sdlt_calculator import SDLT_Calculator
 from developments import developments
-from cls_buyer_types import get_buyer_type_name, BuyerTypes
+from cls_buyer_types import BuyerTypes
 from decimal import Decimal
 from cls_sdlt_rates import SDLT_Rates
 
@@ -15,14 +15,14 @@ def analyze_development(development: Development)-> None:
 
     # Get the buyer type
     buyer_type = development.buyer.buyer_type
-    print(f"Buyer type: {get_buyer_type_name(buyer_type)}")
+    print(f"Buyer type: {buyer_type.label}")
 
     # Get the address
-    address = developments[development]["address"]
+    address = development.property.address
     print(f"Address: {address}")
 
     # Get the comments
-    comments = developments[development].get("comments", "")
+    comments = development.comments
     if comments:
         print(f"Comments: {comments}")
 
@@ -33,7 +33,11 @@ def analyze_development(development: Development)-> None:
 
 sdlt_calculator = SDLT_Calculator()
 
-for development in developments:
+for key, development in developments.items():
+    
+    print(f"key: {key}")
+    print(f"development: {development}")
+    print("=" * 40)
     analyze_development(development)
 
     # Get the buyer type

@@ -1,4 +1,4 @@
-from cls_buyer_types import get_buyer_type_name, BuyerTypes
+from cls_buyer_types import BuyerTypes
 from cls_sdlt_rates import SDLT_Rates
 from decimal import Decimal
 
@@ -75,6 +75,6 @@ class SDLT_Calculator:
         """
         print(f"Price: £{price:,}")
         for buyer_type in BuyerTypes:
-            title = get_buyer_type_name(buyer_type)
+            title = buyer_type
             sdlt = self.calculate_sdlt(buyer_type, price)
             print(f"SDLT: £{sdlt:>10,.2f} for a {title}")

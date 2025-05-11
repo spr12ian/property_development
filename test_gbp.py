@@ -1,4 +1,4 @@
-from gbp import GBP
+from cls_gbp import GBP
 
 def test_gbp():
     # Test GBP class

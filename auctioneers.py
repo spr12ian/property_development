@@ -1,5 +1,5 @@
 from cls_auctioneer import Auctioneer
-from gbp import GBP
+from cls_gbp import GBP
 
 
 auctioneers: dict[str, Auctioneer] = {
