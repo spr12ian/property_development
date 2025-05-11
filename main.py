@@ -26,8 +26,22 @@ def analyze_development(development: Development)-> None:
     if comments:
         print(f"Comments: {comments}")
 
+    aiming_to_sell_for = development.aiming_to_sell_for
+    if aiming_to_sell_for:
+        print(f"Aiming to sell for: £{aiming_to_sell_for:>9,.2f}")
+
+    net_profit_or_loss = development.net_profit_or_loss()
+    if net_profit_or_loss:
+        print(f"Net profit/loss: £{net_profit_or_loss:>9,.2f}")
+    # Get the expenses
+    expenses = development.expenses
+    if expenses:
+        print("Expenses:")
+        for expense in expenses:
+            print(f"  - {expense.description}: £{expense.cost:>9,.2f}")
+
     # Get the URL
-    url = developments[development].get("url", "")
+    url = development.property.lot.url
     if url:
         print(f"URL: {url}")
 
@@ -40,30 +54,8 @@ for key, development in developments.items():
     print("=" * 40)
     analyze_development(development)
 
-    # Get the buyer type
-    print(f"development: {development}")
-    print("=" * 40)
-
-    # Get the buyer type
-    buyer_type = developments[development]["buyer_type"]
-    print(f"Buyer type: {get_buyer_type_name(buyer_type)}")
-
-    # Get the address
-    address = developments[development]["address"]
-    print(f"Address: {address}")
-
-    # Get the comments
-    comments = developments[development].get("comments", "")
-    if comments:
-        print(f"Comments: {comments}")
-
-    # Get the URL
-    url = developments[development].get("url", "")
-    if url:
-        print(f"URL: {url}")
 
 for key, value in developments.items():
-    pprint(key)
 
     (
         address,
