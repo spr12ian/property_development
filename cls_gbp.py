@@ -9,8 +9,9 @@ class GBP:
     amount: Number
 
     def __post_init__(self):
-        # Ensure amount is always a Decimal
-        object.__setattr__(self, 'amount', Decimal(self.amount))
+        # Ensure amount is always a Decimal, even if it's an int or float
+        amount = Decimal(self.amount) if not isinstance(self.amount, Decimal) else self.amount
+        object.__setattr__(self, 'amount', amount)
 
     def __str__(self) -> str:
         return f"£{self.amount:,.2f}"

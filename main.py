@@ -6,79 +6,15 @@ from decimal import Decimal
 from cls_sdlt_rates import SDLT_Rates
 
 
-def analyze_development(development: Development) -> None:
-    """
-    Analyze a development and print the results.
-    :param development: The development to analyze.
-    """
-    print(f"Analyzing development: {development}")
-    print("=" * 40)
-
-    # Get the buyer type
-    buyer_type = development.buyer.buyer_type
-    print(f"Buyer type: {buyer_type.label}")
-
-    # Get the address
-    address = development.dwelling.address
-    print(f"Address: {address}")
-
-    # Get the comments
-    comments = development.comments
-    if comments:
-        print(f"Comments: {comments}")
-
-    aiming_to_sell_for = development.aiming_to_sell_for
-    if aiming_to_sell_for:
-        print(f"Aiming to sell for: £{aiming_to_sell_for:>9,.2f}")
-
-    net_profit_or_loss = development.net_profit_or_loss()
-    if net_profit_or_loss:
-        print(f"Net profit/loss: £{net_profit_or_loss:>9,.2f}")
-    # Get the expenses
-    expenses = development.expenses
-    if expenses:
-        print("Expenses:")
-        for expense in expenses:
-            print(f"  - {expense.expense_type.label}: £{expense.cost:>9,.2f}")
-    # Get the estate agent fee
-    estate_agent_fee = development.estate_agent_fee
-    if estate_agent_fee:
-        print(f"  - Estate agent fee: £{estate_agent_fee:>9,.2f}")
-    # Get the auctioneer
-    auctioneer = development.dwelling.lot.auction.auctioneer
-    if auctioneer:
-        print(f"Auctioneer: {auctioneer.name}")
-        print(f"  - Buyers fee: £{auctioneer.buyers_fee:>9,.2f}")
-        print(f"  - URL: {auctioneer.url}")
-    # Get the dwelling
-    dwelling = development.dwelling
-    if dwelling:
-        print(f"  - Dwelling type: {dwelling.dwelling_type.label}")
-        print(f"  - Bedrooms: {dwelling.bedrooms}")
-        print(f"  - Bathrooms: {dwelling.bathrooms}")
-        print(f"  - Garden: {dwelling.garden.label}")
-        print(f"  - Parking: {dwelling.parking.label}")
-        print(f"  - Garage: {dwelling.garage.label}")
-        print(f"  - Leasehold: {dwelling.leasehold.label}")
-        print(f"  - Freehold: {dwelling.freehold.label}")
-        print(f"  - Leasehold years remaining: {dwelling.leasehold_years_remaining}")
-        print(f"  - Freehold years remaining: {dwelling.freehold_years_remaining}")
-
-
-    # Get the URL
-    url = development.dwelling.lot.url
-    if url:
-        print(f"URL: {url}")
-
 
 sdlt_calculator = SDLT_Calculator()
 
 for key, development in developments.items():
+    development.analyze()
 
     print(f"key: {key}")
     print(f"development: {development}")
     print("=" * 40)
-    analyze_development(development)
 
 
 for key, value in developments.items():
