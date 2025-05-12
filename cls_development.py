@@ -30,6 +30,8 @@ class Development:
         print("=" * 40)
 
         print(f"Property: {self.dwelling}")
+        print(self.dwelling.details)
+        
         print(f"Buyer: {self.buyer}")
 
         if comments := self.comments:
@@ -37,45 +39,37 @@ class Development:
 
         print(f"Aiming to sell for: {str(self.aiming_to_sell_for)}")
 
-        net_profit_or_loss = self.net_profit_or_loss()
-        if net_profit_or_loss:
-            print(f"Net profit/loss: £{net_profit_or_loss:>9,.2f}")
         # Get the expenses
         expenses = self.expenses
         if expenses:
             print("Expenses:")
             for expense in expenses:
                 print(f"  - {expense.expense_type.label}: £{expense.cost:>9,.2f}")
-        # Get the estate agent fee
-        estate_agent_fee = self.estate_agent_fee
-        if estate_agent_fee:
-            print(f"  - Estate agent fee: £{estate_agent_fee:>9,.2f}")
-        # Get the auctioneer
-        auctioneer = self.dwelling.lot.auction.auctioneer
-        if auctioneer:
-            print(f"Auctioneer: {auctioneer.name}")
-            print(f"  - Buyers fee: £{auctioneer.buyers_fee:>9,.2f}")
-            print(f"  - URL: {auctioneer.url}")
-        # Get the dwelling
-        dwelling = self.dwelling
-        if dwelling:
-            print(f"  - Dwelling type: {dwelling.dwelling_type.label}")
-            print(f"  - Bedrooms: {dwelling.bedrooms}")
-            print(f"  - Bathrooms: {dwelling.bathrooms}")
-            print(f"  - Garden: {dwelling.garden.label}")
-            print(f"  - Parking: {dwelling.parking.label}")
-            print(f"  - Garage: {dwelling.garage.label}")
-            print(f"  - Leasehold: {dwelling.leasehold.label}")
-            print(f"  - Freehold: {dwelling.freehold.label}")
-            print(
-                f"  - Leasehold years remaining: {dwelling.leasehold_years_remaining}"
-            )
-            print(f"  - Freehold years remaining: {dwelling.freehold_years_remaining}")
 
-        # Get the URL
-        url = self.dwelling.lot.url
-        if url:
-            print(f"URL: {url}")
+        # Get the estate agent fee
+        if estate_agent_fee := self.estate_agent_fee:           
+            print(f"  - Estate agent fee: £{estate_agent_fee:>9,.2f}")
+
+        print(f"Net profit/loss: £{self.net_profit_or_loss():>9,.2f}")
+
+        if lot := self.dwelling.lot:
+            print(f"Lot: {lot}")
+            print(f"  - Auction date: {lot.auction_date}")
+            print(f"  - Auction house: {lot.auction_house.name}")
+            print(f"  - Auction type: {lot.auction_type.label}")
+            print(f"  - Auction URL: {lot.auction.url}")
+
+            # Get the auctioneer
+            auctioneer = self.dwelling.lot.auction.auctioneer
+            if auctioneer:
+                print(f"Auctioneer: {auctioneer.name}")
+                print(f"  - Buyers fee: £{auctioneer.buyers_fee:>9,.2f}")
+                print(f"  - URL: {auctioneer.url}")
+
+                # Get the URL
+                url = self.dwelling.lot.url
+                if url:
+                    print(f"URL: {url}")
 
     @property
     def estate_agent_fee(self) -> GBP:
