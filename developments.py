@@ -5,16 +5,16 @@ from cls_expense_types import ExpenseTypes
 from decimal import Decimal
 from cls_gbp import GBP
 from cls_percentage import Percentage
-from properties import properties
+from dwellings import dwellings
 
 
 developments = {
     "2021-05-10 Charlie": Development(
-        aiming_to_sell_for= GBP(1100000),
-        buyer= buyers["Charlie"],
-        comments= "Charlie paid 2nd home SDLT £36,200 and received a refund of £22,990.56",
-        estate_agent_percentage= Percentage(2),
-        expenses= (
+        aiming_to_sell_for=GBP(1100000),
+        buyer=buyers["Charlie"],
+        comments="Charlie paid 2nd home SDLT £36,200 and received a refund of £22,990.56",
+        estate_agent_percentage=Percentage(2),
+        expenses=(
             DevelopmentExpense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
                 cost=GBP(1500 + 300 + 275 + 55 + 36 + 220.1 + 540 + 14.4),
@@ -40,7 +40,7 @@ developments = {
                 cost=GBP(36200) - GBP(22990.56),
             ),
         ),
-        property= properties["SW17 0SR"],
+        dwelling=dwellings["SW17 0SR"],
     ),
     # "2025-04-08 CB Property Development": Development(
     #     aiming_to_sell_for= GBP(480000),
@@ -81,7 +81,7 @@ developments = {
     #     expense_conveyancing_fee_sell= GBP(2500),
     #     expense_insurance= GBP(400),
     #     expense_renovation= GBP(50000),
-    #     property= properties["SE5 5HG"], # "22 Malcolm Road, London, SE25 5HG",
+    #     property= dwellings["SE5 5HG"], # "22 Malcolm Road, London, SE25 5HG",
     # ),
     # "2025-04-08 Ian B & Ian S": Development(
     #     aiming_to_sell_for= GBP(480000),
@@ -92,7 +92,7 @@ developments = {
     #     expense_conveyancing_fee_sell= GBP(2500),
     #     expense_insurance= GBP(400),
     #     expense_renovation= GBP(50000),
-    #     property= properties["SE5 5HG"], # "22 Malcolm Road, London, SE25 5HG",
+    #     property= dwellings["SE5 5HG"], # "22 Malcolm Road, London, SE25 5HG",
     # ),
     # "2025-04-08 Josh": Development(
     #     aiming_to_sell_for= GBP(475000),
@@ -105,7 +105,7 @@ developments = {
     #     expense_conveyancing_fee_sell= GBP(2500),
     #     expense_insurance= GBP(400),
     #     expense_renovation= GBP(50000),
-    #     property= properties["SE5 5HG"], # "22 Malcolm Road, London, SE25 5HG",
+    #     property= dwellings["SE5 5HG"], # "22 Malcolm Road, London, SE25 5HG",
     #     url= "https://auctions.savills.co.uk/auctions/8-april-2025-185/22-malcolm-road-south-norwood-london-se25-5hg-15765",
     # ),
     # "2025-09-01 Josh": Development(
@@ -116,7 +116,7 @@ developments = {
     #     expense_conveyancing_fee_sell= GBP(2500),
     #     expense_insurance= GBP(400),
     #     expense_renovation= GBP(0),
-    #     property= properties["SW15 3SA"], # "Somewhere near work, London, SW15 3SA",
+    #     property= dwellings["SW15 3SA"], # "Somewhere near work, London, SW15 3SA",
     # ),
     # "2025-09-02 Josh": Development(
     #     buyer= buyers["Josh"],
@@ -127,7 +127,7 @@ developments = {
     #     expense_conveyancing_fee_sell= GBP(2500),
     #     expense_insurance= GBP(400),
     #     expense_renovation= GBP(0),
-    #     property= properties["SW15 3SA"], # "Somewhere near work, London, SW15 3SA",
+    #     property= dwellings["SW15 3SA"], # "Somewhere near work, London, SW15 3SA",
     # ),
     # "2025-04-16 Josh": Development(
     #     aiming_to_sell_for= GBP(800000),
@@ -140,15 +140,15 @@ developments = {
     #     expense_conveyancing_fee_sell= GBP(2500),
     #     expense_insurance= GBP(400),
     #     expense_renovation= GBP(100000),
-    #     property= properties["SW12 8SQ"], # "Flat A, 23 Airedale Road, Balham, London, SW12 8SQ"
+    #     property= dwellings["SW12 8SQ"], # "Flat A, 23 Airedale Road, Balham, London, SW12 8SQ"
     #     url= "https://www.allsop.co.uk/lot-overview/vacant-leasehold-self-contained-ground-floor-flat-in-london/r250415-088",
     # ),
     "2025-05-22 Josh": Development(
-        aiming_to_sell_for= GBP(582000),
-        buyer= buyers["Josh"],
-        comments= "Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
-        estate_agent_percentage= Percentage(2),        
-        expenses= (
+        aiming_to_sell_for=GBP(582000),
+        buyer=buyers["Josh"],
+        comments="Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
+        estate_agent_percentage=Percentage(2),
+        expenses=(
             DevelopmentExpense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
                 cost=GBP(3000),
@@ -174,7 +174,7 @@ developments = {
                 cost=GBP(36200) - GBP(22990.56),
             ),
         ),
-        property= properties["SW8 3ST"],
+        dwelling=dwellings["SW8 3ST"],
     ),
 }
 
@@ -191,6 +191,3 @@ def format(value):
         return value
     else:
         return value
-
-
-

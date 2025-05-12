@@ -10,3 +10,15 @@ class BuyerTypes(Enum):
     @property
     def label(self) -> str:
         return self.name.replace("_", " ").title()
+
+    def __str__(self) -> str:
+        """
+        Return the user-friendly string representation of the BuyerTypes.
+        """
+        return self.label
+
+    def __repr__(self) -> str:
+        """
+        Return the developer-friendly representation of the BuyerTypes.
+        """
+        return f"BuyerTypes.{self.name}"

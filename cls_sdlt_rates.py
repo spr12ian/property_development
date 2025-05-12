@@ -2,6 +2,7 @@ from cls_buyer_types import BuyerTypes
 from decimal import Decimal
 from enum import Enum
 
+
 class SDLT_Rates:
     constants = {
         BuyerTypes.FIRST_TIME_BUYER: {
@@ -72,7 +73,7 @@ class SDLT_Rates:
         for buyer_type in BuyerTypes:
             if buyer_type not in SDLT_Rates.constants:
                 continue
-            
+
             print("\n" + "=" * 40)
             title = buyer_type.name.replace("_", " ").title()
             rates = SDLT_Rates.constants[buyer_type]["rates"]
@@ -86,13 +87,19 @@ class SDLT_Rates:
                 if i == 0:
                     print(f"{title} {band}: up to £{upper_bound:,} at {rate}%")
                 elif i == last_band_index:
-                    print(f"{title} {band}: above £{sorted_bands[i-1][1]['upper_bound']:,} at {rate}% (last band)")
+                    print(
+                        f"{title} {band}: above £{sorted_bands[i-1][1]['upper_bound']:,} at {rate}% (last band)"
+                    )
                     if buyer_type == BuyerTypes.FIRST_TIME_BUYER:
                         max_price = SDLT_Rates.constants[buyer_type]["max_price"]
-                        print(f"{title} rates only apply for properties up to £{max_price:,}")
+                        print(
+                            f"{title} rates only apply for dwellings up to £{max_price:,}"
+                        )
                 else:
                     print(f"{title} {band}: then up to £{upper_bound:,} at {rate}%")
 
         print("\n" + "=" * 40)
-        print("Note: SDLT rates are subject to change. Always check the latest government guidelines.")
+        print(
+            "Note: SDLT rates are subject to change. Always check the latest government guidelines."
+        )
         print("=" * 40)

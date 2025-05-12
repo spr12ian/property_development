@@ -6,13 +6,12 @@ class ExpenseTypes(Enum):
     CONVEYANCING_FEE_BUY = auto()
     CONVEYANCING_FEE_SELL = auto()
     INSURANCE = auto()
+    OPPORTUNITY_COST = auto()
     PROPERTY_COST_PRICE = auto()
     RENOVATION_COST = auto()
     STAMP_DUTY = auto()
     # Additional expense types can be added as needed
 
-    def __str__(self) -> str:
-        """
-        Returns the expense type as a formatted string.
-        """
+    @property
+    def label(self) -> str:
         return self.name.replace("_", " ").title()

@@ -89,7 +89,7 @@ class CGT_Calculator:
                     if buyer_type is BuyerTypes.FIRST_TIME_BUYER:
                         max_price = SDLT_Rates[buyer_type]["max_price"]
                         print(
-                            f"{title} rates only apply for properties up tp £{max_price:,}"
+                            f"{title} rates only apply for dwellings up tp £{max_price:,}"
                         )
                 else:
                     print(f"{title} {band}: then up to £{upper_bound:,} at {rate}%")
