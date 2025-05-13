@@ -39,22 +39,33 @@ class Dwelling:
         """
         Returns a detailed string representation of the dwelling.
         """
+        
+        if bathrooms := str(self.bathrooms):
+            bathrooms = f"  Bathrooms: {bathrooms}\n"
+        
+        if bedrooms := str(self.bedrooms):
+            bedrooms = f"  Bedrooms: {bedrooms}\n"
+        
         if description := self.description:
-            description = f"Description: {description}\n"
+            description = f"  Description: {description}\n"
+        
+        if lot := self.lot:
+            lot = f"  Lot: {lot}\n"
 
 
         return (
             f"Property Details:\n"
             f"  Property type: {self.dwelling_type}\n"
             f"  Address: {self.address}, {self.postcode}\n"
-            f"  Description: {description if description else ''}"
             f"  Ownership: {self.ownership}\n"
-            f"  Lot: {self.lot if self.lot else 'No lot information'}"
+            f"{description if description else ''}"
+            f"{bedrooms if bedrooms else ''}"
+            f"{bathrooms if bathrooms else ''}"
+            f"{lot if lot else ''}"
         )
         
 
-        print(f"  - Bedrooms: {dwelling.bedrooms}")
-        print(f"  - Bathrooms: {dwelling.bathrooms}")
+
         print(f"  - Garden: {dwelling.garden.label}")
         print(f"  - Parking: {dwelling.parking.label}")
         print(f"  - Garage: {dwelling.garage.label}")

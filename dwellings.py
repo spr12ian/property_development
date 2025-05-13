@@ -21,6 +21,8 @@ dwellings: dict[str, Dwelling] = {
     ),
     "SW17 0SR": Dwelling(
         address="Glenburnie Lodge, 1 Springfield Drive, London",
+        bathrooms=2,
+        bedrooms=3,
         description="A beautiful property located in a prime area.",
         dwelling_type=DwellingTypes.HOUSE,
         ownership=OwnershipTypes.FREEHOLD,

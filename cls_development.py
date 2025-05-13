@@ -26,12 +26,8 @@ class Development:
         """
         Analyze this development and print the results.
         """
-        print(f"Analyzing development: {self}")
-        print("=" * 40)
-
-        print(f"Property: {self.dwelling}")
         print(self.dwelling.details)
-        
+
         print(f"Buyer: {self.buyer}")
 
         if comments := self.comments:
@@ -47,7 +43,7 @@ class Development:
                 print(f"  - {expense.expense_type.label}: £{expense.cost:>9,.2f}")
 
         # Get the estate agent fee
-        if estate_agent_fee := self.estate_agent_fee:           
+        if estate_agent_fee := self.estate_agent_fee:
             print(f"  - Estate agent fee: £{estate_agent_fee:>9,.2f}")
 
         print(f"Total outgoings: £{self.total_outgoings:>9,.2f}")
@@ -68,6 +64,8 @@ class Development:
                 url = self.dwelling.lot.url
                 if url:
                     print(f"URL: {url}")
+
+        print("=" * 40)
 
     @property
     def estate_agent_fee(self) -> GBP:
