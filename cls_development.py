@@ -50,21 +50,19 @@ class Development:
         if estate_agent_fee := self.estate_agent_fee:           
             print(f"  - Estate agent fee: £{estate_agent_fee:>9,.2f}")
 
+        print(f"Total outgoings: £{self.total_outgoings:>9,.2f}")
+
         print(f"Net profit/loss: £{self.net_profit_or_loss():>9,.2f}")
 
         if lot := self.dwelling.lot:
             print(f"Lot: {lot}")
-            print(f"  - Auction date: {lot.auction_date}")
-            print(f"  - Auction house: {lot.auction_house.name}")
-            print(f"  - Auction type: {lot.auction_type.label}")
-            print(f"  - Auction URL: {lot.auction.url}")
+            print(f"  - Auction date: {lot.auction.auction_date}")
 
             # Get the auctioneer
             auctioneer = self.dwelling.lot.auction.auctioneer
             if auctioneer:
                 print(f"Auctioneer: {auctioneer.name}")
                 print(f"  - Buyers fee: £{auctioneer.buyers_fee:>9,.2f}")
-                print(f"  - URL: {auctioneer.url}")
 
                 # Get the URL
                 url = self.dwelling.lot.url
@@ -76,7 +74,12 @@ class Development:
         return self.estate_agent_percentage.of(self.aiming_to_sell_for)
 
     def net_profit_or_loss(self) -> GBP:
+        total_outgoings = self.total_outgoings
+        return self.aiming_to_sell_for - total_outgoings
+
+    @property
+    def total_outgoings(self):
         total_expenses = sum((e.cost for e in self.expenses), start=GBP(0))
         agent_fee = self.estate_agent_fee
         total_outgoings = total_expenses + agent_fee
-        return self.aiming_to_sell_for - total_outgoings
+        return total_outgoings

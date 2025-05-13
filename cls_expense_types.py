@@ -6,6 +6,7 @@ class ExpenseTypes(Enum):
     CONVEYANCING_FEE_BUY = auto()
     CONVEYANCING_FEE_SELL = auto()
     INSURANCE = auto()
+    LOAN_FROM_JOSH = auto()
     OPPORTUNITY_COST = auto()
     PROPERTY_COST_PRICE = auto()
     RENOVATION_COST = auto()

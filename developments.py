@@ -28,6 +28,10 @@ developments = {
                 cost=GBP(400) * 4,
             ),
             DevelopmentExpense(
+                expense_type=ExpenseTypes.LOAN_FROM_JOSH,
+                cost=GBP(162000),
+            ),
+            DevelopmentExpense(
                 expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
                 cost=GBP(765000),
             ),
