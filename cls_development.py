@@ -48,7 +48,15 @@ class Development:
 
         print(f"Total outgoings: £{self.total_outgoings:>9,.2f}")
 
-        print(f"Net profit/loss: £{self.net_profit_or_loss():>9,.2f}")
+        net_profit_or_loss = self.net_profit_or_loss()
+
+        print(f"Net profit/loss: £{net_profit_or_loss:>9,.2f}")
+
+        profit_split = net_profit_or_loss / 2
+
+        print(f"50/50 split: £{profit_split:>9,.2f}")
+
+
 
         if lot := self.dwelling.lot:
             print(f"Lot: {lot}")

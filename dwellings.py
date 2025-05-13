@@ -13,7 +13,6 @@ dwellings: dict[str, Dwelling] = {
     ),
     "SW8 3ST": Dwelling(
         address="11 Tennyson Street, Battersea, London",
-        description="VACANT - Leasehold Self Contained Ground Floor Flat",
         dwelling_type=DwellingTypes.APARTMENT,
         ownership=OwnershipTypes.LEASEHOLD,
         postcode="SW8 3ST",
@@ -25,7 +24,9 @@ dwellings: dict[str, Dwelling] = {
         bedrooms=3,
         description="A beautiful property located in a prime area.",
         dwelling_type=DwellingTypes.HOUSE,
+        garden=True,
         ownership=OwnershipTypes.FREEHOLD,
+        parking=True,
         postcode="SW17 0SR",
     ),
 }
