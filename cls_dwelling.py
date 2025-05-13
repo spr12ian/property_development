@@ -39,11 +39,15 @@ class Dwelling:
         """
         Returns a detailed string representation of the dwelling.
         """
+        if description := self.description:
+            description = f"Description: {description}\n"
+
+
         return (
             f"Property Details:\n"
             f"  Property type: {self.dwelling_type}\n"
             f"  Address: {self.address}, {self.postcode}\n"
-            f"  Description: {self.description + '\n' if self.description else ''}"
+            f"  Description: {description if description else ''}"
             f"  Ownership: {self.ownership}\n"
             f"  Lot: {self.lot if self.lot else 'No lot information'}"
         )
