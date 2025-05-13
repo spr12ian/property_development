@@ -8,12 +8,12 @@ from typing import Optional
 @dataclass(frozen=True)
 class Dwelling:
     address: str
-    description: str
     postcode: str
     dwelling_type: DwellingTypes
     ownership: OwnershipTypes
     bedrooms: Optional[int] = None
     bathrooms: Optional[int] = None
+    description: Optional[str]=None
     lot: Optional[Lot] = None
 
     def __str__(self) -> str:
@@ -42,10 +42,9 @@ class Dwelling:
         return (
             f"Property Details:\n"
             f"  Property type: {self.dwelling_type}\n"
-            f"  Address: {self.address}\n"
-            f"  Description: {self.description}\n"
+            f"  Address: {self.address}, {self.postcode}\n"
+            f"  Description: {self.description + '\n' if self.description else ''}"
             f"  Ownership: {self.ownership}\n"
-            f"  Postcode: {self.postcode}\n"
             f"  Lot: {self.lot if self.lot else 'No lot information'}"
         )
         
