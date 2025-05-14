@@ -176,6 +176,35 @@ developments = {
         ),
         dwelling=dwellings["SW8 3ST"],
     ),
+    "2025-05-28 Josh": Development(
+        aiming_to_sell_for=GBP(582000),
+        buyer=buyers["Josh"],
+        comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
+        estate_agent_percentage=Percentage(2),
+        expenses=(
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
+                cost=GBP(3000),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
+                cost=GBP(2500),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.INSURANCE,
+                cost=GBP(400),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
+                cost=GBP(1.8 * 400000),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.RENOVATION_COST,
+                cost=GBP(50000),
+            ),
+        ),
+        dwelling=dwellings["SW19 1BS"],
+    ),
 }
 
 

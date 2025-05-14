@@ -29,4 +29,15 @@ dwellings: dict[str, Dwelling] = {
         parking=True,
         postcode="SW17 0SR",
     ),
+    "SW19 1BS": Dwelling(
+        address="32a Hotham Road, London",
+        bathrooms=1,
+        bedrooms=3,
+        dwelling_type=DwellingTypes.APARTMENT,
+        garden=True,
+        ownership=OwnershipTypes.LEASEHOLD,
+        leasehold_years_remaining=100,
+        parking=False,
+        postcode="SW19 1BS",
+    ),
 }
