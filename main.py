@@ -10,7 +10,6 @@ from cls_sdlt_rates import SDLT_Rates
 sdlt_calculator = SDLT_Calculator()
 
 for key, development in developments.items():
-    print(f"key: {key}")
     development.analyze()
 
 

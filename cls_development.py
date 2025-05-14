@@ -33,28 +33,27 @@ class Development:
         if comments := self.comments:
             print(f"Comments: {comments}")
 
-        print(f"Aiming to sell for: {str(self.aiming_to_sell_for)}")
+        print(f"{self.aiming_to_sell_for.fixed_location('Aiming to sell for')}")
 
         # Get the expenses
         expenses = self.expenses
         if expenses:
             print("Expenses:")
             for expense in expenses:
-                print(f"  - {expense.expense_type.label}: £{expense.cost:>9,.2f}")
+                print(f"{expense.cost.fixed_location(expense.expense_type.label,'  - ')}")
 
         # Get the estate agent fee
         if estate_agent_fee := self.estate_agent_fee:
-            print(f"  - Estate agent fee: £{estate_agent_fee:>9,.2f}")
-
-        print(f"Total outgoings: £{self.total_outgoings:>9,.2f}")
+            print(f"{estate_agent_fee.fixed_location('Estate agent fee','  - ')}")
 
         net_profit_or_loss = self.net_profit_or_loss()
 
-        print(f"Net profit/loss: £{net_profit_or_loss:>9,.2f}")
-
         profit_split = net_profit_or_loss / 2
 
-        print(f"50/50 split: £{profit_split:>9,.2f}")
+        print(f"{self.total_outgoings.fixed_location('Total outgoings')}")
+        print(f"{net_profit_or_loss.fixed_location('Net profit/loss')}")
+
+        print(f"{profit_split.fixed_location('50/50 split')}")
 
         print("=" * 40)
 

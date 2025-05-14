@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from decimal import Decimal
 from typing import Union
 
-Number = Union[int, float, Decimal, 'GBP']
+Number = Union[int, float, Decimal, "GBP"]
+
 
 @dataclass(frozen=True)
 class GBP:
@@ -10,8 +11,12 @@ class GBP:
 
     def __post_init__(self):
         # Ensure amount is always a Decimal, even if it's an int or float
-        amount = Decimal(self.amount) if not isinstance(self.amount, Decimal) else self.amount
-        object.__setattr__(self, 'amount', amount)
+        amount = (
+            Decimal(self.amount)
+            if not isinstance(self.amount, Decimal)
+            else self.amount
+        )
+        object.__setattr__(self, "amount", amount)
 
     def __str__(self) -> str:
         return f"£{self.amount:,.2f}"
@@ -19,20 +24,20 @@ class GBP:
     def __repr__(self) -> str:
         return f"GBP({self.amount})"
 
-    def __add__(self, other: Number) -> 'GBP':
+    def __add__(self, other: Number) -> "GBP":
         if isinstance(other, GBP):
             return GBP(self.amount + other.amount)
         return GBP(self.amount + Decimal(other))
 
-    def __sub__(self, other: Number) -> 'GBP':
+    def __sub__(self, other: Number) -> "GBP":
         if isinstance(other, GBP):
             return GBP(self.amount - other.amount)
         return GBP(self.amount - Decimal(other))
 
-    def __mul__(self, other: Union[int, float, Decimal]) -> 'GBP':
+    def __mul__(self, other: Union[int, float, Decimal]) -> "GBP":
         return GBP(self.amount * Decimal(other))
 
-    def __truediv__(self, other: Union[int, float, Decimal]) -> 'GBP':
+    def __truediv__(self, other: Union[int, float, Decimal]) -> "GBP":
         return GBP(self.amount / Decimal(other))
 
     def __eq__(self, other: object) -> bool:
@@ -43,16 +48,24 @@ class GBP:
         return NotImplemented
 
     def __lt__(self, other: Number) -> bool:
-        return self.amount < (other.amount if isinstance(other, GBP) else Decimal(other))
+        return self.amount < (
+            other.amount if isinstance(other, GBP) else Decimal(other)
+        )
 
     def __le__(self, other: Number) -> bool:
-        return self.amount <= (other.amount if isinstance(other, GBP) else Decimal(other))
+        return self.amount <= (
+            other.amount if isinstance(other, GBP) else Decimal(other)
+        )
 
     def __gt__(self, other: Number) -> bool:
-        return self.amount > (other.amount if isinstance(other, GBP) else Decimal(other))
+        return self.amount > (
+            other.amount if isinstance(other, GBP) else Decimal(other)
+        )
 
     def __ge__(self, other: Number) -> bool:
-        return self.amount >= (other.amount if isinstance(other, GBP) else Decimal(other))
+        return self.amount >= (
+            other.amount if isinstance(other, GBP) else Decimal(other)
+        )
 
     def __ne__(self, other: object) -> bool:
         return not self.__eq__(other)
@@ -77,5 +90,16 @@ class GBP:
         return f"£{amount:,.2f}"
 
     @staticmethod
-    def from_gbp(amount: str) -> 'GBP':
+    def from_gbp(amount: str) -> "GBP":
         return GBP(Decimal(amount.replace("£", "").replace(",", "")))
+
+    def fixed_location(self, label, prefix: str = "") -> str:
+        """
+        Returns the amount in a fixed location.
+        """
+        DEFAULT_LOCATION = 30
+        location = DEFAULT_LOCATION - len(prefix)
+
+        amount_str = f"£{self.amount:,.2f}"
+        output = f"{prefix}{(label+':'):<25}{amount_str:>{location}}"
+        return output
