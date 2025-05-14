@@ -176,10 +176,10 @@ developments = {
         ),
         dwelling=dwellings["SW8 3ST"],
     ),
-    "2025-05-28 Josh": Development(
+    "2025-05-28 Charlie": Development(
         aiming_to_sell_for=GBP(582000),
-        buyer=buyers["Josh"],
-        comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
+        buyer=buyers["Charlie"],
+        comments="Check stamp duty",
         estate_agent_percentage=Percentage(2),
         expenses=(
             DevelopmentExpense(
@@ -196,7 +196,7 @@ developments = {
             ),
             DevelopmentExpense(
                 expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
-                cost=GBP(1.8 * 400000),
+                cost=GBP(450000),
             ),
             DevelopmentExpense(
                 expense_type=ExpenseTypes.RENOVATION_COST,

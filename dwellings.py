@@ -37,6 +37,7 @@ dwellings: dict[str, Dwelling] = {
         garden=True,
         ownership=OwnershipTypes.LEASEHOLD,
         leasehold_years_remaining=100,
+        lot=lots["2025_05_28_savills_597"],
         parking=False,
         postcode="SW19 1BS",
     ),
