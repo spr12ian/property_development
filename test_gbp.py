@@ -3,21 +3,21 @@ from cls_gbp import GBP
 def test_gbp():
     # Test GBP class
     gbp = GBP(1000)
-    assert gbp.value == 1000
+    assert gbp.amount == 1000
     assert str(gbp) == "£1,000.00"
     
     # Test addition
     gbp2 = GBP(500)
-    assert (gbp + gbp2).value == 1500
+    assert (gbp + gbp2).amount == 1500
     
     # Test subtraction
-    assert (gbp - gbp2).value == 500
+    assert (gbp - gbp2).amount == 500
     
     # Test multiplication
-    assert (gbp * 2).value == 2000
+    assert (gbp * 2).amount == 2000
     
     # Test division
-    assert (gbp / 2).value == 500
+    assert (gbp / 2).amount == 500
     
     # Test comparison
     assert gbp > gbp2

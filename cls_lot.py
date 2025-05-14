@@ -35,6 +35,10 @@ class Lot:
         """
         Returns a detailed string representation of the lot.
         """
+        print(self.guide_price)
+        print(str(self.guide_price))
+        print(f"{self.guide_price}")
+        print(f"{str(self.guide_price)}")
         auction = f"  Auction: {self.auction}\n"
         description = f"  Description: {self.description}\n" if self.description else ""
         guide_price = f"  Guide price: {self.guide_price}\n"

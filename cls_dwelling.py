@@ -15,6 +15,7 @@ class Dwelling:
     bathrooms: Optional[int] = None
     description: Optional[str] = None
     garden: Optional[bool] = None
+    leasehold_years_remaining: Optional[int] = None
     lot: Optional[Lot] = None
     parking: Optional[bool] = None
 
@@ -41,6 +42,9 @@ class Dwelling:
         """
         Returns a detailed string representation of the dwelling.
         """
+
+        address = f"  Address: {self.address}, {self.postcode}\n"
+
         bathrooms = (
             f"  Bathrooms: {self.bathrooms}\n"
             if self.bathrooms and self.bathrooms > 0
@@ -53,6 +57,9 @@ class Dwelling:
             else ""
         )
 
+        dwelling_type = f"  Property type: {self.dwelling_type}\n"
+        
+
         garden = (
             f"  Garden: {'Yes' if self.garden else 'No'}\n"
             if self.garden is not None
@@ -62,6 +69,12 @@ class Dwelling:
         description = (
             f"  Description: {self.description}\n"
             if self.description
+            else ""
+        )
+
+        leasehold_years_remaining = (
+            f"  Leasehold years remaining: {self.leasehold_years_remaining}\n"
+            if self.leasehold_years_remaining and self.leasehold_years_remaining > 0
             else ""
         )
 
@@ -79,9 +92,10 @@ class Dwelling:
 
         return (
             f"Property Details:\n"
-            f"  Property type: {self.dwelling_type}\n"
-            f"  Address: {self.address}, {self.postcode}\n"
+            f"{dwelling_type}"
+            f"{address}"
             f"  Ownership: {self.ownership}\n"
+            f"{leasehold_years_remaining if leasehold_years_remaining else ''}"
             f"{description if description else ''}"
             f"{bedrooms if bedrooms else ''}"
             f"{bathrooms if bathrooms else ''}"
