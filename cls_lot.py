@@ -30,26 +30,24 @@ class Lot:
             f"url={self.url!r})"
         )
 
-    @property
-    def details(self) -> str:
+    def details(self, indentation: str = "") -> str:
         """
         Returns a detailed string representation of the lot.
+        The first line is prefixed with `indentation`, and subsequent lines
+        are indented further by two additional spaces.
         """
-        print(self.guide_price)
-        print(str(self.guide_price))
-        print(f"{self.guide_price}")
-        print(f"{str(self.guide_price)}")
-        auction = f"  Auction: {self.auction}\n"
-        description = f"  Description: {self.description}\n" if self.description else ""
-        guide_price = f"  Guide price: {self.guide_price}\n"
-        lot_number = f"  Lot number: {self.lot_number}\n"
-        url = f"  Lot number: {self.url}\n"
+        sub_indent = indentation + "  "
 
-        return (
-            f"Lot Details:\n"
-            f"{auction if auction else ''}"
-            f"{lot_number if lot_number else ''}"
-            f"{guide_price if guide_price else ''}"
-            f"{description if description else ''}"
-            f"{url if url else ''}"
-        )
+        lines = [
+            "Lot Details:",
+            f"{sub_indent}{self.auction.details(sub_indent)}",
+            f"{sub_indent}Lot number: {self.lot_number}",
+            f"{sub_indent}Guide price: {str(self.guide_price)}",
+        ]
+
+        if self.description:
+            lines.append(f"{sub_indent}Description: {self.description}")
+
+        lines.append(f"{sub_indent}URL: {self.url}")
+
+        return "\n".join(lines) + "\n"

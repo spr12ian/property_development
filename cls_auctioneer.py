@@ -22,3 +22,20 @@ class Auctioneer:
             f"buyers_fee={self.buyers_fee!r}, "
             f"url={self.url!r})"
         )
+
+    def details(self, indentation: str = "") -> str:
+        """
+        Returns a detailed string representation of the auctioneer.
+        The first line is prefixed with `indentation`, and subsequent lines
+        are indented further by two additional spaces.
+        """
+        sub_indent = indentation + "  "
+
+        lines = [
+            "Auctioneer Details:",
+            f"{sub_indent}Auctioneer: {self.name}",
+            f"{sub_indent}Buyer's fee: {str(self.buyers_fee)}",
+            f"{sub_indent}Website: {self.url}",
+        ]
+
+        return "\n".join(lines) + "\n"

@@ -26,7 +26,7 @@ class Development:
         """
         Analyze this development and print the results.
         """
-        print(self.dwelling.details)
+        print(self.dwelling.details())
 
         print(f"Buyer: {self.buyer}")
 
@@ -55,23 +55,6 @@ class Development:
         profit_split = net_profit_or_loss / 2
 
         print(f"50/50 split: £{profit_split:>9,.2f}")
-
-
-
-        if lot := self.dwelling.lot:
-            print(f"Lot: {lot}")
-            print(f"  - Auction date: {lot.auction.auction_date}")
-
-            # Get the auctioneer
-            auctioneer = self.dwelling.lot.auction.auctioneer
-            if auctioneer:
-                print(f"Auctioneer: {auctioneer.name}")
-                print(f"  - Buyers fee: £{auctioneer.buyers_fee:>9,.2f}")
-
-                # Get the URL
-                url = self.dwelling.lot.url
-                if url:
-                    print(f"URL: {url}")
 
         print("=" * 40)
 

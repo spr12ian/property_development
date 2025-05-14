@@ -146,7 +146,7 @@ developments = {
     "2025-05-22 Josh": Development(
         aiming_to_sell_for=GBP(582000),
         buyer=buyers["Josh"],
-        comments="Pay £10,000 stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
+        comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         estate_agent_percentage=Percentage(2),
         expenses=(
             DevelopmentExpense(

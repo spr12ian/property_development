@@ -37,71 +37,43 @@ class Dwelling:
             f"lot={self.lot!r})"
         )
 
-    @property
-    def details(self) -> str:
+    def details(self, indentation: str = "") -> str:
         """
         Returns a detailed string representation of the dwelling.
         """
+        sub_indent = indentation + "  "
 
-        address = f"  Address: {self.address}, {self.postcode}\n"
+        lines = [
+            f"Property Details:",
+            f"{sub_indent}Property type: {self.dwelling_type}",
+            f"{sub_indent}Address: {self.address}, {self.postcode}",
+            f"{sub_indent}Ownership: {self.ownership}",
+        ]
 
-        bathrooms = (
-            f"  Bathrooms: {self.bathrooms}\n"
-            if self.bathrooms and self.bathrooms > 0
-            else ""
-        )
+        if self.leasehold_years_remaining and self.leasehold_years_remaining > 0:
+            lines.append(
+                f"{sub_indent}Leasehold years remaining: {self.leasehold_years_remaining}"
+            )
 
-        bedrooms = (
-            f"  Bedrooms: {self.bedrooms}\n"
-            if self.bedrooms and self.bedrooms > 0
-            else ""
-        )
+        if self.description:
+            lines.append(f"{sub_indent}Description: {self.description}")
 
-        dwelling_type = f"  Property type: {self.dwelling_type}\n"
-        
+        if self.bedrooms and self.bedrooms > 0:
+            lines.append(f"{sub_indent}Bedrooms: {self.bedrooms}")
 
-        garden = (
-            f"  Garden: {'Yes' if self.garden else 'No'}\n"
-            if self.garden is not None
-            else ""
-        )
+        if self.bathrooms and self.bathrooms > 0:
+            lines.append(f"{sub_indent}Bathrooms: {self.bathrooms}")
 
-        description = (
-            f"  Description: {self.description}\n"
-            if self.description
-            else ""
-        )
+        if self.garden is not None:
+            lines.append(f"{sub_indent}Garden: {'Yes' if self.garden else 'No'}")
 
-        leasehold_years_remaining = (
-            f"  Leasehold years remaining: {self.leasehold_years_remaining}\n"
-            if self.leasehold_years_remaining and self.leasehold_years_remaining > 0
-            else ""
-        )
+        if self.lot:
+            lot_details = self.lot.details(sub_indent)
+            lines.append(
+                f"{sub_indent}{lot_details.strip()}"
+            )  
 
-        lot = (
-            f"{self.lot.details}\n"
-            if self.lot
-            else ""
-        )
+        if self.parking is not None:
+            lines.append(f"{sub_indent}Parking: {'Yes' if self.parking else 'No'}")
 
-        parking = (
-            f"  Parking: {'Yes' if self.parking else 'No'}\n"
-            if self.parking is not None
-            else ""
-        )
-
-        return (
-            f"Property Details:\n"
-            f"{dwelling_type}"
-            f"{address}"
-            f"  Ownership: {self.ownership}\n"
-            f"{leasehold_years_remaining if leasehold_years_remaining else ''}"
-            f"{description if description else ''}"
-            f"{bedrooms if bedrooms else ''}"
-            f"{bathrooms if bathrooms else ''}"
-            f"{garden if garden else ''}"
-            f"{lot if lot else ''}"
-            f"{parking if parking else ''}"
-        )
-
-        print(f"  - Leasehold years remaining: {dwelling.leasehold_years_remaining}")
+        return "\n".join(lines) + "\n"
