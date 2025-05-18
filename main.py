@@ -1,16 +1,38 @@
-from cls_development import Development
-from cls_sdlt_calculator import SDLT_Calculator
-from developments import developments
-from cls_buyer_types import BuyerTypes
-from decimal import Decimal
-from cls_sdlt_rates import SDLT_Rates
+from cls_helper_sys import SysHelper
+from m_developments import print_developments
+from m_properties import print_properties
+from m_sdlt_rates import print_sdlt_rates
 
 
+def main():
+    sys_helper = SysHelper()
 
-sdlt_calculator = SDLT_Calculator()
+    valid_parameters = ["developments", "properties", "sdlt"]
 
-for key, development in developments.items():
-    development.analyze()
+    if sys_helper.how_many_parameters == 0:
+        parameter = "developments"
+    else:
+        parameter = sys_helper.get_first_parameter()
+        if parameter not in valid_parameters:
+            print(
+                f"Invalid parameter: {parameter}. Valid parameters are: {valid_parameters}"
+            )
+            exit(1)
+
+    match parameter:
+        case "developments":
+            print_developments()
+        case "properties":
+            print_properties()
+        case "sdlt":
+            print_sdlt_rates()
+        case _:
+            print(f"Unknown parameter: {parameter}")
+            exit(1)
+
+
+if __name__ == "__main__":
+    main()
 
 
 # for key, value in developments.items():
@@ -97,5 +119,3 @@ for key, development in developments.items():
 #             print(f"Capital gains tax: £{capital_gains_tax:>9,.2f}")
 
 #         print(f"Net profit: £{pre_tax_profit - capital_gains_tax:>9,.2f}")
-
-

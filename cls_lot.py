@@ -1,7 +1,6 @@
 from cls_auction import Auction
 from dataclasses import dataclass
 from cls_gbp import GBP
-from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -10,7 +9,8 @@ class Lot:
     guide_price: GBP
     lot_number: int
     url: str
-    description: Optional[str] = None
+    description: str | None = None
+    hammer_price: GBP | None = None
 
     def __str__(self) -> str:
         """
@@ -44,6 +44,9 @@ class Lot:
             f"{sub_indent}Lot number: {self.lot_number}",
             f"{sub_indent}Guide price: {str(self.guide_price)}",
         ]
+
+        if self.hammer_price:
+            lines.append(f"{sub_indent}Hammer price: {str(self.hammer_price)}")
 
         if self.description:
             lines.append(f"{sub_indent}Description: {self.description}")

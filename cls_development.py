@@ -24,17 +24,21 @@ class Development:
         if not isinstance(self.expenses, tuple):
             object.__setattr__(self, "expenses", tuple(self.expenses))
 
-    def analyze(self) -> None:
+    def details(self, indentation: str = "") -> str:
         """
-        Analyze this development and print the results.
+        Returns a detailed string representation of the development.
         """
-        print(self.dwelling.details())
+        sub_indent = indentation + "  "
 
-        print(f"Buyer: {self.buyer}")
+        lines = [
+            f"Development Details:",
+            f"{sub_indent}{self.dwelling.details(sub_indent)}",
+            f"{sub_indent}Buyer: {self.buyer}",
+        ]
 
         self.print_expenses()
 
-        match(self.buyer.buyer_type):
+        match (self.buyer.buyer_type):
             case BuyerTypes.FIRST_TIME_BUYER:
                 print("Buyer: First time buyer")
             case BuyerTypes.NON_FIRST_TIME_BUYER:
@@ -45,7 +49,6 @@ class Development:
                 print("Buyer: Limited company")
             case _:
                 raise ValueError(f"Unknown buyer type: {self.buyer.buyer_type}")
-
 
         if comments := self.comments:
             print(f"Comments: {comments}")
@@ -59,11 +62,14 @@ class Development:
             profit_split = net_profit_or_loss / 2
 
             print(f"{self.total_outgoings.fixed_location('Total outgoings')}")
+
+            print(f"{self.maximum_bid.fixed_location('Maximum bid')}")
+
             print(f"{net_profit_or_loss.fixed_location('Net profit/loss')}")
 
             print(f"{profit_split.fixed_location('50/50 split')}")
 
-        print("=" * 40)
+        return "\n".join(lines) + "\n"
 
     @property
     def estate_agent_fee(self) -> GBP:
@@ -72,7 +78,7 @@ class Development:
     def net_profit_or_loss(self) -> GBP:
         total_outgoings = self.total_outgoings
         return self.aiming_to_sell_for - total_outgoings
-    
+
     def print_expenses(self) -> None:
         """
         Print the expenses for this development.
@@ -86,11 +92,25 @@ class Development:
         if expenses:
             print("Expenses:")
             for expense in expenses:
-                print(f"{expense.cost.fixed_location(expense.expense_type.label,'  - ')}")
+                print(
+                    f"{expense.cost.fixed_location(expense.expense_type.label,'  - ')}"
+                )
 
         # Get the estate agent fee
         if estate_agent_fee := self.estate_agent_fee:
             print(f"{estate_agent_fee.fixed_location('Estate agent fee','  - ')}")
+
+    @property
+    def maximum_bid(self) -> GBP:
+        minimum_acceptable_profit = GBP(60000)
+        conservative_sale_price = Percentage(90).of(self.aiming_to_sell_for)
+        maximum_expenses=conservative_sale_price-minimum_acceptable_profit
+        conservative_profit = max(GBP(0), conservative_sale_price - self.total_outgoings)
+        
+        if conservative_profit < minimum_acceptable_profit:
+            return GBP(0)
+        else:
+            return max(GBP(0), self.aiming_to_sell_for - conservative_profit)
 
     @property
     def total_outgoings(self) -> GBP:

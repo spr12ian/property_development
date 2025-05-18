@@ -1,11 +1,10 @@
-from buyers import buyers
 from cls_development import Development
 from cls_development_expense import DevelopmentExpense
 from cls_expense_types import ExpenseTypes
-from decimal import Decimal
 from cls_gbp import GBP
 from cls_percentage import Percentage
-from dwellings import dwellings
+from d_buyers import buyers
+from d_dwellings import dwellings
 
 
 developments = {
@@ -176,6 +175,39 @@ developments = {
         ),
         dwelling=dwellings["SW8 3ST"],
     ),
+    "2025-05-22 Josh": Development(
+        aiming_to_sell_for=GBP(582000),
+        buyer=buyers["Josh"],
+        comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
+        estate_agent_percentage=Percentage(2),
+        expenses=(
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
+                cost=GBP(3000),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
+                cost=GBP(2500),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.INSURANCE,
+                cost=GBP(400),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
+                cost=GBP(360000),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.RENOVATION_COST,
+                cost=GBP(100000),
+            ),
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.STAMP_DUTY,
+                cost=GBP(36200) - GBP(22990.56),
+            ),
+        ),
+        dwelling=dwellings["SW17 7QW"],
+    ),
     "2025-05-28 Charlie": Development(
         aiming_to_sell_for=GBP(582000),
         buyer=buyers["Charlie"],
@@ -206,17 +238,3 @@ developments = {
         dwelling=dwellings["SW19 1BS"],
     ),
 }
-
-
-def format(value):
-    """
-    Pretty print the value.
-    """
-    if isinstance(value, GBP):
-        return f"£{value:,.2f}"
-    elif isinstance(value, Percentage):
-        return f"{value}%"
-    elif isinstance(value, str):
-        return value
-    else:
-        return value

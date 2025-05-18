@@ -69,9 +69,7 @@ class Dwelling:
 
         if self.lot:
             lot_details = self.lot.details(sub_indent)
-            lines.append(
-                f"{sub_indent}{lot_details.strip()}"
-            )  
+            lines.append(f"{sub_indent}{lot_details.strip()}")
 
         if self.parking is not None:
             lines.append(f"{sub_indent}Parking: {'Yes' if self.parking else 'No'}")

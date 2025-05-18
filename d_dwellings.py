@@ -1,22 +1,23 @@
 from cls_dwelling import Dwelling
 from cls_dwelling_types import DwellingTypes
 from cls_ownership_types import OwnershipTypes
-from lots import lots
+from d_lots import lots
 
 dwellings: dict[str, Dwelling] = {
     "SE5 5HG": Dwelling(
         address="22 Malcolm Road, London",
         description="Too far from us",
         dwelling_type=DwellingTypes.HOUSE,
+        lot=lots["2025_04_08_savills_46"],
         ownership=OwnershipTypes.FREEHOLD,
         postcode="SE5 5HG",
     ),
     "SW8 3ST": Dwelling(
         address="11 Tennyson Street, Battersea, London",
         dwelling_type=DwellingTypes.APARTMENT,
+        lot=lots["2025_05_22_allsop_34"],
         ownership=OwnershipTypes.LEASEHOLD,
         postcode="SW8 3ST",
-        lot=lots["2025_05_22_allsop_34"],
     ),
     "SW17 0SR": Dwelling(
         address="Glenburnie Lodge, 1 Springfield Drive, London",
@@ -28,6 +29,17 @@ dwellings: dict[str, Dwelling] = {
         ownership=OwnershipTypes.FREEHOLD,
         parking=True,
         postcode="SW17 0SR",
+    ),
+    "SW17 7QW": Dwelling(
+        address="Flat B, 47 Hosack Road, Balham, London",
+        bathrooms=2,
+        bedrooms=2,
+        description="First floor flat. No parking. No garden.",
+        dwelling_type=DwellingTypes.APARTMENT,
+        garden=False,
+        ownership=OwnershipTypes.LEASEHOLD,
+        parking=False,
+        postcode="SW17 7QW",
     ),
     "SW19 1BS": Dwelling(
         address="32a Hotham Road, London",
