@@ -1,6 +1,7 @@
 from cls_buyer import Buyer
 from cls_buyer_types import BuyerTypes
 from cls_development_expense import DevelopmentExpense
+from cls_expense_types import ExpenseTypes
 from cls_gbp import GBP
 from cls_percentage import Percentage
 from cls_dwelling import Dwelling
@@ -75,6 +76,30 @@ class Development:
     def estate_agent_fee(self) -> GBP:
         return self.estate_agent_percentage.of(self.aiming_to_sell_for)
 
+    def get_calculated_expenses(self) -> Tuple[DevelopmentExpense, ...]:
+        """
+        Returns a tuple of calculated expenses.
+        """
+        calculated_expenses: list[DevelopmentExpense] = []
+        for expense in self.expenses:
+            expense_type = expense.expense_type
+            expense_cost = expense.cost
+            calculated_expenses.append(
+                DevelopmentExpense(
+                    expense_type=expense_type,
+                    cost=expense_cost,
+                )
+            )
+
+        # Add the estate agent fee to the expenses
+        calculated_expenses.append(
+            DevelopmentExpense(
+                expense_type=ExpenseTypes.ESTATE_AGENT_FEE,
+                cost=self.estate_agent_fee,
+            )
+        )
+        return tuple(calculated_expenses)
+
     def net_profit_or_loss(self) -> GBP:
         total_outgoings = self.total_outgoings
         return self.aiming_to_sell_for - total_outgoings
@@ -88,7 +113,7 @@ class Development:
         print("=" * 40)
 
         # Get the expenses
-        expenses = self.expenses
+        expenses = self.get_calculated_expenses()
         if expenses:
             print("Expenses:")
             for expense in expenses:
@@ -96,17 +121,17 @@ class Development:
                     f"{expense.cost.fixed_location(expense.expense_type.label,'  - ')}"
                 )
 
-        # Get the estate agent fee
-        if estate_agent_fee := self.estate_agent_fee:
-            print(f"{estate_agent_fee.fixed_location('Estate agent fee','  - ')}")
+
 
     @property
     def maximum_bid(self) -> GBP:
         minimum_acceptable_profit = GBP(60000)
         conservative_sale_price = Percentage(90).of(self.aiming_to_sell_for)
-        maximum_expenses=conservative_sale_price-minimum_acceptable_profit
-        conservative_profit = max(GBP(0), conservative_sale_price - self.total_outgoings)
-        
+        maximum_expenses = conservative_sale_price - minimum_acceptable_profit
+        conservative_profit = max(
+            GBP(0), conservative_sale_price - self.total_outgoings
+        )
+
         if conservative_profit < minimum_acceptable_profit:
             return GBP(0)
         else:
