@@ -6,7 +6,7 @@ from cls_gbp import GBP
 from cls_percentage import Percentage
 from cls_dwelling import Dwelling
 from dataclasses import dataclass, field
-from typing import Optional, Tuple
+from typing import Tuple
 
 
 @dataclass(frozen=True)
@@ -37,44 +37,61 @@ class Development:
             f"{sub_indent}Buyer: {self.buyer}",
         ]
 
-        self.print_expenses()
-
-        match (self.buyer.buyer_type):
-            case BuyerTypes.FIRST_TIME_BUYER:
-                print("Buyer: First time buyer")
-            case BuyerTypes.NON_FIRST_TIME_BUYER:
-                print("Buyer: Non first time buyer")
-            case BuyerTypes.SECOND_HOME_BUYER:
-                print("Buyer: Second home buyer")
-            case BuyerTypes.LIMITED_COMPANY:
-                print("Buyer: Limited company")
-            case _:
-                raise ValueError(f"Unknown buyer type: {self.buyer.buyer_type}")
-
         if comments := self.comments:
-            print(f"Comments: {comments}")
+            lines.append(f"{sub_indent}Comments: {comments}")
+
+        lines.append(f"{sub_indent}{'Expenses':-<40}")
+        lines.append(f"{sub_indent}{'Description':<20} {'Cost':>20}")
+        lines.append(f"{sub_indent}{'=' * 40}")
+        lines.append(f"{sub_indent}1234567890123456789012345678901234567890123456789012345678901234567890")
+
+        calculated_expenses = self.get_calculated_expenses()
+        for expense in calculated_expenses:
+            lines.append(
+                f"{sub_indent}  {self.fixed_location(expense.cost,expense.expense_type.label,'- ')}"
+            )
+
+        total_expenses = sum(
+            (expense.cost for expense in calculated_expenses), start=GBP(0)
+        )
+
+        lines.append(f"{sub_indent}  {self.fixed_location(total_expenses,'Total')}")
 
         if aiming_to_sell_for := self.aiming_to_sell_for:
 
-            print(f"{aiming_to_sell_for.fixed_location('Aiming to sell for')}")
+            lines.append(f"{sub_indent}{self.fixed_location(aiming_to_sell_for,'Aiming to sell for')}")
 
             net_profit_or_loss = self.net_profit_or_loss()
 
             profit_split = net_profit_or_loss / 2
 
-            print(f"{self.total_outgoings.fixed_location('Total outgoings')}")
+            lines.append(f"{sub_indent}{self.fixed_location(self.maximum_bid,'Maximum bid')}")
 
-            print(f"{self.maximum_bid.fixed_location('Maximum bid')}")
+            lines.append(f"{sub_indent}{self.fixed_location(net_profit_or_loss,'Net profit/loss')}")
 
-            print(f"{net_profit_or_loss.fixed_location('Net profit/loss')}")
-
-            print(f"{profit_split.fixed_location('50/50 split')}")
+            lines.append(f"{sub_indent}{self.fixed_location(profit_split,'50/50 split')}")
 
         return "\n".join(lines) + "\n"
 
     @property
     def estate_agent_fee(self) -> GBP:
         return self.estate_agent_percentage.of(self.aiming_to_sell_for)
+
+    def fixed_location(self, amount: GBP, label: str = "", prefix: str = "") -> str:
+        """
+        Returns the amount in a fixed location.
+        Ensures the amount is right-aligned to a fixed column.
+        """
+        LABEL_WIDTH = 25
+        AMOUNT_COLUMN = 50  # total characters from start of line to where £xxx.xx ends
+
+        amount_str = f"£{amount:,.2f}"
+        label_with_colon = f"{label}:" if label else ""
+        left_part = f"{prefix}{label_with_colon:<{LABEL_WIDTH}}"
+        padding = max(0, AMOUNT_COLUMN - len(left_part) - len(amount_str))
+        output = f"{left_part}{' ' * padding}{amount_str}"
+        return output
+
 
     def get_calculated_expenses(self) -> Tuple[DevelopmentExpense, ...]:
         """
@@ -103,25 +120,6 @@ class Development:
     def net_profit_or_loss(self) -> GBP:
         total_outgoings = self.total_outgoings
         return self.aiming_to_sell_for - total_outgoings
-
-    def print_expenses(self) -> None:
-        """
-        Print the expenses for this development.
-        """
-        print(f"{'Expenses':-<40}")
-        print(f"{'Description':<20} {'Cost':>20}")
-        print("=" * 40)
-
-        # Get the expenses
-        expenses = self.get_calculated_expenses()
-        if expenses:
-            print("Expenses:")
-            for expense in expenses:
-                print(
-                    f"{expense.cost.fixed_location(expense.expense_type.label,'  - ')}"
-                )
-
-
 
     @property
     def maximum_bid(self) -> GBP:

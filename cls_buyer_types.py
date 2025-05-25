@@ -22,7 +22,7 @@ class NonFirstTimeBuyer(BuyerType):
     pass
 
 
-class SecondTimeBuyer(BuyerType):
+class SecondHomeBuyer(BuyerType):
     pass
 
 
@@ -33,7 +33,7 @@ class LimitedCompany(BuyerType):
 class BuyerTypes:
     FIRST_TIME_BUYER = FirstTimeBuyer()
     NON_FIRST_TIME_BUYER = NonFirstTimeBuyer()
-    SECOND_TIME_BUYER = SecondTimeBuyer()
+    SECOND_HOME_BUYER = SecondHomeBuyer()
     LIMITED_COMPANY = LimitedCompany()
 
     @classmethod
@@ -41,6 +41,6 @@ class BuyerTypes:
         return [
             cls.FIRST_TIME_BUYER,
             cls.NON_FIRST_TIME_BUYER,
-            cls.SECOND_TIME_BUYER,
+            cls.SECOND_HOME_BUYER,
             cls.LIMITED_COMPANY,
         ]

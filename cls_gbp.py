@@ -92,14 +92,3 @@ class GBP:
     @staticmethod
     def from_gbp(amount: str) -> "GBP":
         return GBP(Decimal(amount.replace("£", "").replace(",", "")))
-
-    def fixed_location(self, label, prefix: str = "") -> str:
-        """
-        Returns the amount in a fixed location.
-        """
-        DEFAULT_LOCATION = 30
-        location = DEFAULT_LOCATION - len(prefix)
-
-        amount_str = f"£{self.amount:,.2f}"
-        output = f"{prefix}{(label+':'):<25}{amount_str:>{location}}"
-        return output
