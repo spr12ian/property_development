@@ -1,24 +1,46 @@
-from enum import Enum, auto
+import re
 
-class BuyerTypes(Enum):
-    FIRST_TIME_BUYER = auto()
-    NON_FIRST_TIME_BUYER = auto()
-    SECOND_HOME_BUYER = auto()
-    LIMITED_COMPANY = auto()
-    # Additional buyer types can be added as needed
-    
+
+class BuyerType:
     @property
     def label(self) -> str:
-        return self.name.replace("_", " ").title()
+        # Convert CamelCase class name to "Camel Case"
+        return re.sub(r"(?<!^)(?=[A-Z])", " ", self.__class__.__name__)
 
     def __str__(self) -> str:
-        """
-        Return the user-friendly string representation of the BuyerTypes.
-        """
         return self.label
 
     def __repr__(self) -> str:
-        """
-        Return the developer-friendly representation of the BuyerTypes.
-        """
-        return f"BuyerTypes.{self.name}"
+        return f"{self.__class__.__name__}()"
+
+
+class FirstTimeBuyer(BuyerType):
+    pass
+
+
+class NonFirstTimeBuyer(BuyerType):
+    pass
+
+
+class SecondTimeBuyer(BuyerType):
+    pass
+
+
+class LimitedCompany(BuyerType):
+    pass
+
+
+class BuyerTypes:
+    FIRST_TIME_BUYER = FirstTimeBuyer()
+    NON_FIRST_TIME_BUYER = NonFirstTimeBuyer()
+    SECOND_TIME_BUYER = SecondTimeBuyer()
+    LIMITED_COMPANY = LimitedCompany()
+
+    @classmethod
+    def all(cls):
+        return [
+            cls.FIRST_TIME_BUYER,
+            cls.NON_FIRST_TIME_BUYER,
+            cls.SECOND_TIME_BUYER,
+            cls.LIMITED_COMPANY,
+        ]

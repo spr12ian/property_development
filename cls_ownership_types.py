@@ -1,25 +1,42 @@
-from enum import Enum, auto
+import re
 
 
-class OwnershipTypes(Enum):
-    COMMONHOLD = auto()
-    FREEHOLD = auto()
-    LEASEHOLD = auto()
-    SHARE_OF_FREEHOLD = auto()
-    # Additional Ownership types can be added as needed
+class OwnershipType():
 
     @property
     def label(self) -> str:
-        return self.name.replace("_", " ").title()
+        # Convert CamelCase class name to "Camel Case"
+        return re.sub(r"(?<!^)(?=[A-Z])", " ", self.__class__.__name__)
 
     def __str__(self) -> str:
-        """
-        Return the user-friendly string representation of the OwnershipTypes.
-        """
         return self.label
 
     def __repr__(self) -> str:
-        """
-        Return the developer-friendly representation of the OwnershipTypes.
-        """
-        return f"OwnershipTypes.{self.name}"
+        return f"{self.__class__.__name__}()"
+
+
+class Commonhold(OwnershipType):
+    pass
+
+
+class Freehold(OwnershipType):
+    pass
+
+
+class Leasehold(OwnershipType):
+    pass
+
+
+class ShareOfFreehold(OwnershipType):
+    pass
+
+
+class OwnershipTypes:
+    COMMONHOLD = Commonhold()
+    FREEHOLD = Freehold()
+    LEASEHOLD = Leasehold()
+    SHARE_OF_FREEHOLD = ShareOfFreehold()
+
+    @classmethod
+    def all(cls):
+        return [cls.COMMONHOLD, cls.FREEHOLD, cls.LEASEHOLD, cls.SHARE_OF_FREEHOLD]

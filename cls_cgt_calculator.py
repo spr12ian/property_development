@@ -1,4 +1,4 @@
-from cls_buyer_types import get_buyer_type_name, BuyerTypes
+from cls_buyer_types import BuyerTypes
 from cls_cgt_rates import CGT_Rates
 from decimal import Decimal
 

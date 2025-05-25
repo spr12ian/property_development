@@ -1,6 +1,6 @@
-from cls_dwelling_types import DwellingTypes
+from cls_dwelling_types import DwellingType
 from cls_lot import Lot
-from cls_ownership_types import OwnershipTypes
+from cls_ownership_types import OwnershipType
 from dataclasses import dataclass
 from typing import Optional
 
@@ -9,8 +9,8 @@ from typing import Optional
 class Dwelling:
     address: str
     postcode: str
-    dwelling_type: DwellingTypes
-    ownership: OwnershipTypes
+    dwelling_type: DwellingType
+    ownership: OwnershipType
     bedrooms: Optional[int] = None
     bathrooms: Optional[int] = None
     description: Optional[str] = None

@@ -1,23 +1,32 @@
-from enum import Enum, auto
+import re
 
 
-class DwellingTypes(Enum):
-    APARTMENT = auto()
-    HOUSE = auto()
-    # Additional Dwelling types can be added as needed
+class DwellingType:
 
     @property
     def label(self) -> str:
-        return self.name.replace("_", " ").title()
+        # Convert CamelCase class name to "Camel Case"
+        return re.sub(r"(?<!^)(?=[A-Z])", " ", self.__class__.__name__)
 
     def __str__(self) -> str:
-        """
-        Return the user-friendly string representation of the DwellingTypes.
-        """
         return self.label
 
     def __repr__(self) -> str:
-        """
-        Return the developer-friendly representation of the DwellingTypes.
-        """
-        return f"DwellingTypes.{self.name}"
+        return f"{self.__class__.__name__}()"
+
+
+class Apartment(DwellingType):
+    pass
+
+
+class House(DwellingType):
+    pass
+
+
+class DwellingTypes:
+    APARTMENT = Apartment()
+    HOUSE = House()
+
+    @classmethod
+    def all(cls):
+        return [cls.APARTMENT, cls.HOUSE]

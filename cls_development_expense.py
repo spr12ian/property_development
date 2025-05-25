@@ -1,11 +1,11 @@
-from cls_expense_types import ExpenseTypes
+from cls_expense_types import ExpenseType
 from dataclasses import dataclass
 from cls_gbp import GBP
 
 
 @dataclass(frozen=True)
 class DevelopmentExpense:
-    expense_type: ExpenseTypes
+    expense_type: ExpenseType
     cost: GBP
 
     def __post_init__(self):

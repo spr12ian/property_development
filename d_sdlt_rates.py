@@ -3,7 +3,6 @@ from cls_gbp import GBP
 from cls_percentage import Percentage
 from cls_sdlt_band import SDLT_Band
 from cls_sdlt_rate import SDLT_Rate
-from enum import Enum
 
 sdlt_rates: dict[str, SDLT_Rate] = {
     BuyerTypes.FIRST_TIME_BUYER.label: SDLT_Rate(

@@ -1,9 +1,9 @@
-from cls_buyer_types import BuyerTypes
+from cls_buyer_types import BuyerType
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Buyer:
-    buyer_type: BuyerTypes
+    buyer_type: BuyerType
     name: str
 
     def __str__(self) -> str:
