@@ -1,16 +1,17 @@
+from cls_buyers import Buyers
 from cls_development import Development
 from cls_development_expense import DevelopmentExpense
+from cls_development_stages import DevelopmentStages
 from cls_expense_types import ExpenseTypes
 from cls_gbp import GBP
 from cls_percentage import Percentage
-from d_buyers import buyers
 from d_dwellings import dwellings
 
 
 developments = {
-    "2021-05-10 Charlie": Development(
+    "2021-05-10 SW17 0SR": Development(
         aiming_to_sell_for=GBP(1100000),
-        buyer=buyers["Charlie"],
+        buyer=Buyers.CHARLIE,
         comments="Charlie paid 2nd home SDLT £36,200 and received a refund of £22,990.56",
         estate_agent_percentage=Percentage(2),
         expenses=(
@@ -40,6 +41,7 @@ developments = {
             ),
         ),
         dwelling=dwellings["SW17 0SR"],
+        stage=DevelopmentStages.BOUGHT,
     ),
     # "2025-04-08 CB Property Development": Development(
     #     aiming_to_sell_for= GBP(480000),
@@ -142,9 +144,9 @@ developments = {
     #     property= dwellings["SW12 8SQ"], # "Flat A, 23 Airedale Road, Balham, London, SW12 8SQ"
     #     url= "https://www.allsop.co.uk/lot-overview/vacant-leasehold-self-contained-ground-floor-flat-in-london/r250415-088",
     # ),
-    "2025-05-22 Josh": Development(
+    "2025-05-22 SW8 3ST": Development(
         aiming_to_sell_for=GBP(582000),
-        buyer=buyers["Josh"],
+        buyer=Buyers.JOSH,
         comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         estate_agent_percentage=Percentage(2),
         expenses=(
@@ -174,10 +176,11 @@ developments = {
             ),
         ),
         dwelling=dwellings["SW8 3ST"],
+        stage=DevelopmentStages.CONSIDERED,
     ),
-    "2025-05-22 Josh": Development(
+    "2025-05-22 SW17 7QW": Development(
         aiming_to_sell_for=GBP(582000),
-        buyer=buyers["Josh"],
+        buyer=Buyers.JOSH,
         comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         estate_agent_percentage=Percentage(2),
         expenses=(
@@ -207,10 +210,11 @@ developments = {
             ),
         ),
         dwelling=dwellings["SW17 7QW"],
+        stage=DevelopmentStages.CONSIDERED,
     ),
-    "2025-05-28 Charlie": Development(
+    "2025-05-28 SW19 1BS": Development(
         aiming_to_sell_for=GBP(582000),
-        buyer=buyers["Charlie"],
+        buyer=Buyers.CHARLIE,
         comments="Check stamp duty",
         estate_agent_percentage=Percentage(2),
         expenses=(
@@ -236,5 +240,6 @@ developments = {
             ),
         ),
         dwelling=dwellings["SW19 1BS"],
+        stage=DevelopmentStages.UNDER_CONSIDERATION,
     ),
 }

@@ -1,22 +1,24 @@
-from cls_buyer import Buyer
-from cls_buyer_types import BuyerTypes
+from __future__ import annotations
+from cls_buyers import Buyer, Buyers
 from cls_development_expense import DevelopmentExpense
+from cls_development_stages import DevelopmentStage, DevelopmentStages
 from cls_expense_types import ExpenseTypes
 from cls_gbp import GBP
 from cls_percentage import Percentage
 from cls_dwelling import Dwelling
 from dataclasses import dataclass, field
-from typing import Tuple
+from typing import Optional, Tuple
 
 
 @dataclass(frozen=True)
 class Development:
     aiming_to_sell_for: GBP
-    buyer: Buyer
-    comments: str
     estate_agent_percentage: Percentage
     dwelling: Dwelling
+    buyer: Buyer = Buyers.CB_DEVELOPMENTS
+    comments: str = ""
     expenses: Tuple[DevelopmentExpense, ...] = field(default_factory=tuple)
+    stage: DevelopmentStage = DevelopmentStages.UNDER_CONSIDERATION
 
     def __str__(self) -> str:
         return f"{self.dwelling} {self.buyer}"
@@ -40,8 +42,39 @@ class Development:
         if comments := self.comments:
             lines.append(f"{sub_indent}Comments: {comments}")
 
+        self.append_expenses(lines, sub_indent)
 
-        lines.append(f"{sub_indent}{'Expense                                     Cost'}")
+        self.stage.append_details(self, lines, sub_indent)
+
+        if aiming_to_sell_for := self.aiming_to_sell_for:
+
+            lines.append(
+                f"{self.fixed_location(aiming_to_sell_for, 'Aiming to sell for', sub_indent)}"
+            )
+
+            net_profit_or_loss = self.net_profit_or_loss()
+
+            profit_split = net_profit_or_loss / 2
+
+            lines.append(
+                f"{self.fixed_location(net_profit_or_loss,'Net profit/loss', sub_indent)}"
+            )
+
+            lines.append(
+                f"{self.fixed_location(profit_split,'50/50 split', sub_indent)}"
+            )
+
+        return "\n".join(lines) + "\n"
+
+    def append_expenses(
+        self, lines: Optional[list[str]] = None, sub_indent: str = ""
+    ) -> None:
+        if lines is None:
+            lines = []
+
+        lines.append(
+            f"{sub_indent}{'Expense                                     Cost'}"
+        )
         lines.append(f"{sub_indent}{'-' * 48}")
 
         calculated_expenses = self.get_calculated_expenses()
@@ -56,31 +89,9 @@ class Development:
         )
 
         prefix = f"{sub_indent}  - "
-        lines.append(f"{self.fixed_location(total_expenses,'Total expenses',sub_indent)}")
-
-        if aiming_to_sell_for := self.aiming_to_sell_for:
-
-            lines.append(
-                f"{self.fixed_location(aiming_to_sell_for, 'Aiming to sell for', sub_indent)}"
-            )
-
-            net_profit_or_loss = self.net_profit_or_loss()
-
-            profit_split = net_profit_or_loss / 2
-
-            lines.append(
-                f"{self.fixed_location(self.maximum_bid,'Maximum bid', sub_indent)}"
-            )
-
-            lines.append(
-                f"{self.fixed_location(net_profit_or_loss,'Net profit/loss', sub_indent)}"
-            )
-
-            lines.append(
-                f"{self.fixed_location(profit_split,'50/50 split', sub_indent)}"
-            )
-
-        return "\n".join(lines) + "\n"
+        lines.append(
+            f"{self.fixed_location(total_expenses,'Total expenses',sub_indent)}"
+        )
 
     @property
     def estate_agent_fee(self) -> GBP:
