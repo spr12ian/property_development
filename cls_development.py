@@ -48,10 +48,6 @@ class Development:
 
         if aiming_to_sell_for := self.aiming_to_sell_for:
 
-            lines.append(
-                f"{self.fixed_location(aiming_to_sell_for, 'Aiming to sell for', sub_indent)}"
-            )
-
             net_profit_or_loss = self.net_profit_or_loss()
 
             profit_split = net_profit_or_loss / 2

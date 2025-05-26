@@ -32,7 +32,9 @@ class Bought(DevelopmentStage):
     def append_details(
         self, development: Development, lines: list[str], sub_indent: str = ""
     ) -> None:
-        pass
+        lines.append(
+            f"{development.fixed_location(development.aiming_to_sell_for, 'Aiming to sell for', sub_indent)}"
+        )
 
 
 class Considered(DevelopmentStage):
@@ -53,6 +55,9 @@ class UnderConsideration(DevelopmentStage):
     def append_details(
         self, development: Development, lines: list[str], sub_indent: str = ""
     ) -> None:
+        lines.append(
+            f"{development.fixed_location(development.aiming_to_sell_for, 'Aiming to sell for', sub_indent)}"
+        )
         lines.append(
             f"{development.fixed_location(development.maximum_bid, 'Maximum bid', sub_indent)}"
         )
