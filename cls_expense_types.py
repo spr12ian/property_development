@@ -1,7 +1,10 @@
+from cls_expense_occurences import ExpenseOccurence, ExpenseOccurences
+from dataclasses import dataclass
 import re
 
-
+@dataclass(frozen=True)
 class ExpenseType:
+    occurence: ExpenseOccurence
 
     @property
     def label(self) -> str:
@@ -64,18 +67,21 @@ class Utilities(ExpenseType):
 
 
 class ExpenseTypes:
-    ACCOUNTANT = Accountant()
-    CONVEYANCING_FEE_BUY = ConveyancingFeeBuy()
-    CONVEYANCING_FEE_SELL = ConveyancingFeeSell()
-    ESTATE_AGENT_FEE = EstateAgentFee()
-    INSURANCE = Insurance()
-    LOAN_FROM_JOSH = LoanFromJosh()
-    OPPORTUNITY_COST = OpportunityCost()
-    PROPERTY_COST_PRICE = PropertyCostPrice()
-    RENOVATION_COST = RenovationCost()
-    STAMP_DUTY = StampDuty()
-    SURVEYOR_FEE = SurveyorFee()
-    UTILITIES = Utilities()
+    """
+    A collection of expense types.
+    """
+    ACCOUNTANT = Accountant(occurence=ExpenseOccurences.PRE_PURCHASE)
+    CONVEYANCING_FEE_BUY = ConveyancingFeeBuy(occurence=ExpenseOccurences.AT_PURCHASE)
+    CONVEYANCING_FEE_SELL = ConveyancingFeeSell(occurence=ExpenseOccurences.AT_SALE)
+    ESTATE_AGENT_FEE = EstateAgentFee(occurence=ExpenseOccurences.AT_SALE)
+    INSURANCE = Insurance(occurence=ExpenseOccurences.AFTER_PURCHASE)
+    LOAN_FROM_JOSH = LoanFromJosh(occurence=ExpenseOccurences.PRE_PURCHASE)
+    OPPORTUNITY_COST = OpportunityCost(occurence=ExpenseOccurences.AFTER_PURCHASE)
+    PROPERTY_COST_PRICE = PropertyCostPrice(occurence=ExpenseOccurences.PRE_PURCHASE)
+    RENOVATION_COST = RenovationCost(occurence=ExpenseOccurences.AFTER_PURCHASE)
+    STAMP_DUTY = StampDuty(occurence=ExpenseOccurences.AT_PURCHASE)
+    SURVEYOR_FEE = SurveyorFee(occurence=ExpenseOccurences.PRE_PURCHASE)
+    UTILITIES = Utilities(occurence=ExpenseOccurences.AFTER_PURCHASE)
 
     @classmethod
     def all(cls):
@@ -91,5 +97,5 @@ class ExpenseTypes:
             cls.RENOVATION_COST,
             cls.STAMP_DUTY,
             cls.SURVEYOR_FEE,
-            cls.UTILITIES,
+            cls.UTILITIES
         ]
