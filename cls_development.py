@@ -40,36 +40,45 @@ class Development:
         if comments := self.comments:
             lines.append(f"{sub_indent}Comments: {comments}")
 
-        lines.append(f"{sub_indent}{'Expenses':-<40}")
-        lines.append(f"{sub_indent}{'Description':<20} {'Cost':>20}")
-        lines.append(f"{sub_indent}{'=' * 40}")
-        lines.append(f"{sub_indent}1234567890123456789012345678901234567890123456789012345678901234567890")
+
+        lines.append(f"{sub_indent}{'Expense                                     Cost'}")
+        lines.append(f"{sub_indent}{'-' * 48}")
 
         calculated_expenses = self.get_calculated_expenses()
+        prefix = f"{sub_indent}  "
         for expense in calculated_expenses:
             lines.append(
-                f"{sub_indent}  {self.fixed_location(expense.cost,expense.expense_type.label,'- ')}"
+                f"{self.fixed_location(expense.cost,expense.expense_type.label,prefix)}"
             )
 
         total_expenses = sum(
             (expense.cost for expense in calculated_expenses), start=GBP(0)
         )
 
-        lines.append(f"{sub_indent}  {self.fixed_location(total_expenses,'Total')}")
+        prefix = f"{sub_indent}  - "
+        lines.append(f"{self.fixed_location(total_expenses,'Total expenses',sub_indent)}")
 
         if aiming_to_sell_for := self.aiming_to_sell_for:
 
-            lines.append(f"{sub_indent}{self.fixed_location(aiming_to_sell_for,'Aiming to sell for')}")
+            lines.append(
+                f"{self.fixed_location(aiming_to_sell_for, 'Aiming to sell for', sub_indent)}"
+            )
 
             net_profit_or_loss = self.net_profit_or_loss()
 
             profit_split = net_profit_or_loss / 2
 
-            lines.append(f"{sub_indent}{self.fixed_location(self.maximum_bid,'Maximum bid')}")
+            lines.append(
+                f"{self.fixed_location(self.maximum_bid,'Maximum bid', sub_indent)}"
+            )
 
-            lines.append(f"{sub_indent}{self.fixed_location(net_profit_or_loss,'Net profit/loss')}")
+            lines.append(
+                f"{self.fixed_location(net_profit_or_loss,'Net profit/loss', sub_indent)}"
+            )
 
-            lines.append(f"{sub_indent}{self.fixed_location(profit_split,'50/50 split')}")
+            lines.append(
+                f"{self.fixed_location(profit_split,'50/50 split', sub_indent)}"
+            )
 
         return "\n".join(lines) + "\n"
 
@@ -91,7 +100,6 @@ class Development:
         padding = max(0, AMOUNT_COLUMN - len(left_part) - len(amount_str))
         output = f"{left_part}{' ' * padding}{amount_str}"
         return output
-
 
     def get_calculated_expenses(self) -> Tuple[DevelopmentExpense, ...]:
         """
