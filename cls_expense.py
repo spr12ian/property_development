@@ -4,7 +4,7 @@ from cls_gbp import GBP
 
 
 @dataclass(frozen=True)
-class DevelopmentExpense:
+class Expense:
     expense_type: ExpenseType
     cost: GBP
 
@@ -13,7 +13,7 @@ class DevelopmentExpense:
             raise ValueError("Amount cannot be negative")
 
     def __eq__(self, other):
-        if not isinstance(other, DevelopmentExpense):
+        if not isinstance(other, Expense):
             return NotImplemented
         return self.expense_type == other.expense_type and self.cost == other.cost
 
@@ -21,34 +21,45 @@ class DevelopmentExpense:
         return hash((self.expense_type, self.cost))
 
     def __lt__(self, other):
-        if not isinstance(other, DevelopmentExpense):
+        if not isinstance(other, Expense):
             return NotImplemented
-        return self.expense_type < other.expense_type or (
-            self.expense_type == other.expense_type and self.cost < other.cost
+
+        self_key = (
+            self.expense_type.occurence.sort_index(),
+            self.expense_type.label,
+            self.cost,
+        )
+        other_key = (
+            other.expense_type.occurence.sort_index(),
+            other.expense_type.label,
+            other.cost,
         )
 
+        return self_key < other_key
+
+
     def __le__(self, other):
-        if not isinstance(other, DevelopmentExpense):
+        if not isinstance(other, Expense):
             return NotImplemented
         return self < other or self == other
 
     def __gt__(self, other):
-        if not isinstance(other, DevelopmentExpense):
+        if not isinstance(other, Expense):
             return NotImplemented
         return not self <= other
 
     def __ge__(self, other):
-        if not isinstance(other, DevelopmentExpense):
+        if not isinstance(other, Expense):
             return NotImplemented
         return not self < other
 
     def __ne__(self, other):
-        if not isinstance(other, DevelopmentExpense):
+        if not isinstance(other, Expense):
             return NotImplemented
         return not self == other
 
     def __repr__(self) -> str:
-        return f"DevelopmentExpense(expense_type={self.expense_type}, cost={self.cost})"
+        return f"Expense(expense_type={self.expense_type!r}, cost={self.cost!r})"
 
     def __str__(self) -> str:
-        return f"{self.expense_type} {self.cost}"
+        return f"{self.expense_type!s} {self.cost!s}"

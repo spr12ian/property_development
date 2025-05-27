@@ -14,6 +14,9 @@ class ExpenseOccurence:
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}()"
 
+    def sort_index(self) -> int:
+        return _OCCURRENCE_ORDER[self]
+
 
 class PrePurchase(ExpenseOccurence):
     pass
@@ -38,6 +41,7 @@ class AtSale(ExpenseOccurence):
 class AfterSale(ExpenseOccurence):
     pass
 
+
 class ExpenseOccurences:
     PRE_PURCHASE = PrePurchase()
     AT_PURCHASE = AtPurchase()
@@ -54,5 +58,8 @@ class ExpenseOccurences:
             cls.AFTER_PURCHASE,
             cls.PRE_SALE,
             cls.AT_SALE,
-            cls.AFTER_SALE
+            cls.AFTER_SALE,
         ]
+
+
+_OCCURRENCE_ORDER = {occ: i for i, occ in enumerate(ExpenseOccurences.all())}

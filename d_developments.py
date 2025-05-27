@@ -1,6 +1,6 @@
 from cls_buyers import Buyers
 from cls_development import Development
-from cls_development_expense import DevelopmentExpense
+from cls_expense import Expense
 from cls_development_stages import DevelopmentStages
 from cls_expense_types import ExpenseTypes
 from cls_gbp import GBP
@@ -15,27 +15,27 @@ developments = {
         comments="Charlie paid 2nd home SDLT £36,200 and received a refund of £22,990.56",
         estate_agent_percentage=Percentage(2),
         expenses=(
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
                 cost=GBP(1500 + 300 + 275 + 55 + 36 + 220.1 + 540 + 14.4),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
                 cost=GBP(2500),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.INSURANCE,
                 cost=GBP(400) * 4,
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
                 cost=GBP(765000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.RENOVATION_COST,
                 cost=GBP(860600) - GBP(765000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.STAMP_DUTY,
                 cost=GBP(36200) - GBP(22990.56),
             ),
@@ -47,31 +47,31 @@ developments = {
     #     aiming_to_sell_for= GBP(480000),
     #     buyer= buyers["CB Developments"],
     #     expenses= [
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.ACCOUNTANT,
     #             cost=GBP(12 * 89 * 1.2),
     #         ),
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
     #             cost=GBP(1500 + 300 + 275 + 55 + 36 + 220.1 + 540 + 14.4),
     #         ),
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
     #             cost=GBP(2500),
     #         ),
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.INSURANCE,
     #             cost=GBP(400) * 4,
     #         ),
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
     #             cost=GBP(765000),
     #         ),
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.RENOVATION_COST,
     #             cost=GBP(860600) - GBP(765000),
     #         ),
-    #         DevelopmentExpense(
+    #         Expense(
     #             expense_type=ExpenseTypes.STAMP_DUTY,
     #             cost=GBP(36200) - GBP(22990.56),
     #         ),
@@ -150,27 +150,27 @@ developments = {
         comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         estate_agent_percentage=Percentage(2),
         expenses=(
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
                 cost=GBP(3000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
                 cost=GBP(2500),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.INSURANCE,
                 cost=GBP(400),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
                 cost=GBP(1.8 * 215000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.RENOVATION_COST,
                 cost=GBP(100000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.STAMP_DUTY,
                 cost=GBP(36200) - GBP(22990.56),
             ),
@@ -184,27 +184,27 @@ developments = {
         comments="Pay stamp duty cost when Josh buys his own place; to be deducted from the profit shown",
         estate_agent_percentage=Percentage(2),
         expenses=(
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
                 cost=GBP(3000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
                 cost=GBP(2500),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.INSURANCE,
                 cost=GBP(400),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
                 cost=GBP(360000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.RENOVATION_COST,
                 cost=GBP(100000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.STAMP_DUTY,
                 cost=GBP(36200) - GBP(22990.56),
             ),
@@ -218,23 +218,23 @@ developments = {
         comments="Check stamp duty",
         estate_agent_percentage=Percentage(2),
         expenses=(
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_BUY,
                 cost=GBP(3000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.CONVEYANCING_FEE_SELL,
                 cost=GBP(2500),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.INSURANCE,
                 cost=GBP(400),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.PROPERTY_COST_PRICE,
                 cost=GBP(450000),
             ),
-            DevelopmentExpense(
+            Expense(
                 expense_type=ExpenseTypes.RENOVATION_COST,
                 cost=GBP(50000),
             ),
